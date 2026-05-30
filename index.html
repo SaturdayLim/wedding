@@ -1,152 +1,2363 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Michael & Natalie — Thank You</title>
-<style>
-  :root {
-    --cream: #faf7f2;
-    --ink: #2a2a28;
-    --muted: #6b6b66;
-    --sage: #8a9a87;
-    --teal: #3d6664;
-    --line: #d8d2c5;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Georgia', 'Cormorant Garamond', serif;
-    background: var(--cream);
-    color: var(--ink);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1.5rem;
-    line-height: 1.5;
-  }
-  .container {
-    max-width: 520px;
-    width: 100%;
-    text-align: center;
-  }
-  .monogram {
-    font-size: 0.75rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 2.5rem;
-  }
-  h1 {
-    font-size: 2.25rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    margin-bottom: 0.5rem;
-    color: var(--teal);
-  }
-  .date {
-    font-size: 0.85rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 2rem;
-  }
-  .divider {
-    width: 40px;
-    height: 1px;
-    background: var(--line);
-    margin: 0 auto 2rem;
-  }
-  .message {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--ink);
-    margin-bottom: 2.5rem;
-    font-style: italic;
-  }
-  .links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-  }
-  .link-card {
-    display: block;
-    padding: 1.25rem 1.5rem;
-    background: white;
-    border: 1px solid var(--line);
-    border-radius: 2px;
-    text-decoration: none;
-    color: var(--ink);
-    transition: all 0.2s ease;
-    text-align: left;
-  }
-  .link-card:hover {
-    border-color: var(--sage);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-  }
-  .link-label {
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--sage);
-    margin-bottom: 0.25rem;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-  }
-  .link-title {
-    font-size: 1.05rem;
-    font-weight: 400;
-    color: var(--ink);
-  }
-  .footer-note {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-top: 2rem;
-    line-height: 1.6;
-  }
-  .signature {
-    margin-top: 2rem;
-    font-size: 0.95rem;
-    color: var(--ink);
-    font-style: italic;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Codigo1530 Sales Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:#185FA5; --blue-light:#E6F1FB; --blue-mid:#378ADD;
+      --green:#3B6D11; --green-light:#EAF3DE;
+      --red:#A32D2D; --red-light:#FCEBEB;
+      --amber-light:#FAEEDA; --amber-dark:#854F0B;
+      --teal-light:#E1F5EE; --teal-dark:#0F6E56;
+      --purple-light:#EEEDFE; --purple-dark:#534AB7;
+      --gray-bg:#F5F5F5; --gray-border:#E0E0E0; --gray-muted:#757575;
+      --text:#1A1A1A; --text-secondary:#555;
+      --card-bg:#FFFFFF; --page-bg:#F0F2F5; --header-bg:#FFFFFF;
+    }
+    body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:var(--page-bg); color:var(--text); font-size:14px; -webkit-font-smoothing:antialiased; min-height:100vh; }
+
+    /* ── LOGIN ──────────────────────────────────── */
+    #login-screen { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; padding:24px; background:var(--page-bg); }
+    .login-card { background:var(--card-bg); border-radius:16px; padding:32px 28px; width:100%; max-width:360px; border:.5px solid var(--gray-border); }
+    .login-logo { width:48px; height:48px; background:var(--blue); border-radius:12px; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; }
+    .login-logo svg { width:26px; height:26px; fill:white; }
+    .login-title { font-size:20px; font-weight:600; text-align:center; margin-bottom:6px; }
+    .login-sub { font-size:13px; color:var(--text-secondary); text-align:center; margin-bottom:28px; }
+    .login-label { font-size:12px; font-weight:500; color:var(--text-secondary); margin-bottom:6px; display:block; }
+    .login-input { width:100%; padding:11px 14px; border:1px solid var(--gray-border); border-radius:10px; font-size:15px; color:var(--text); background:#FAFAFA; margin-bottom:16px; outline:none; transition:border-color .15s; }
+    .login-input:focus { border-color:var(--blue-mid); background:#fff; }
+    .login-btn { width:100%; padding:13px; background:var(--blue); color:white; border:none; border-radius:10px; font-size:15px; font-weight:600; cursor:pointer; transition:opacity .15s; }
+    .login-btn:active { opacity:.85; }
+    .login-error { color:var(--red); font-size:13px; text-align:center; margin-top:12px; display:none; }
+
+    /* ── APP SHELL ──────────────────────────────── */
+    #app { display:none; flex-direction:column; min-height:100vh; }
+    .header { background:var(--header-bg); border-bottom:1px solid var(--gray-border); padding:10px 14px 8px; position:sticky; top:0; z-index:50; }
+    .header-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+    .header-title { font-size:17px; font-weight:600; }
+    .header-date { font-size:12px; color:var(--text-secondary); }
+    .header-actions { display:flex; gap:6px; align-items:center; }
+    .icon-btn { background:none; border:none; color:var(--text-secondary); font-size:13px; cursor:pointer; padding:5px 8px; border-radius:6px; display:flex; align-items:center; gap:4px; }
+    .icon-btn:active { background:var(--gray-bg); }
+    .icon-btn svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+    /* ── SEARCHABLE ACCOUNT DROPDOWN ────────────── */
+    .acct-wrap { position:relative; }
+    .acct-input-row { display:flex; align-items:center; background:var(--gray-bg); border:1px solid var(--gray-border); border-radius:10px; padding:0 10px; gap:6px; transition:border-color .15s; }
+    .acct-input-row:focus-within { border-color:var(--blue-mid); background:#fff; }
+    .acct-input-row svg { flex-shrink:0; color:var(--text-secondary); }
+    .acct-search-input { flex:1; padding:9px 0; background:none; border:none; outline:none; font-size:14px; font-weight:500; color:var(--text); min-width:0; }
+    .acct-search-input::placeholder { color:var(--text-secondary); font-weight:400; }
+    .acct-clear { background:none; border:none; padding:4px; cursor:pointer; color:var(--text-secondary); display:none; line-height:1; font-size:16px; }
+    .acct-dropdown { display:none; position:absolute; top:calc(100% + 4px); left:0; right:0; background:#fff; border:1px solid var(--gray-border); border-radius:10px; max-height:260px; overflow-y:auto; z-index:100; box-shadow:0 4px 16px rgba(0,0,0,.08); -webkit-overflow-scrolling:touch; }
+    .acct-dropdown.open { display:block; }
+    .acct-option { padding:11px 14px; font-size:14px; cursor:pointer; border-bottom:1px solid #F5F5F5; color:var(--text); transition:background .1s; }
+    .acct-option:last-child { border-bottom:none; }
+    .acct-option:active,.acct-option.selected { background:var(--blue-light); color:var(--blue); font-weight:500; }
+    .acct-option.hidden { display:none; }
+    .acct-no-results { padding:14px; font-size:13px; color:var(--text-secondary); text-align:center; }
+
+    /* ── GROUP CHIPS ────────────────────────────── */
+    .group-chips { display:flex; gap:6px; overflow-x:auto; -webkit-overflow-scrolling:touch; padding:8px 0 2px; scrollbar-width:none; }
+    .group-chips::-webkit-scrollbar { display:none; }
+    .group-chip { flex-shrink:0; padding:5px 13px; border-radius:20px; font-size:12px; font-weight:500; border:1px solid var(--gray-border); background:var(--gray-bg); color:var(--text-secondary); cursor:pointer; white-space:nowrap; transition:all .15s; user-select:none; }
+    .group-chip.active { background:var(--blue); border-color:var(--blue); color:white; }
+
+    /* ── SCROLL AREA ────────────────────────────── */
+    .scroll-area { flex:1; padding:12px 12px 90px; display:flex; flex-direction:column; gap:10px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+    .page { display:none; }
+    .page.active { display:flex; flex-direction:column; gap:10px; }
+
+    /* ── CARDS ──────────────────────────────────── */
+    .card { background:var(--card-bg); border-radius:14px; border:1px solid var(--gray-border); padding:14px; }
+    .card-label { font-size:11px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; }
+
+    /* ── SCORECARDS ─────────────────────────────── */
+    .score-inner { background:var(--gray-bg); border-radius:10px; padding:12px; }
+    .score-main { display:flex; justify-content:space-between; align-items:flex-start; }
+    .score-value { font-size:26px; font-weight:700; line-height:1; letter-spacing:-.5px; }
+    .score-period-row { display:flex; align-items:center; gap:6px; margin-top:4px; }
+    .score-period { font-size:11px; color:var(--text-secondary); }
+    .month-nav-btn { background:none; border:none; font-size:18px; line-height:1; padding:0 2px; cursor:pointer; color:var(--text-secondary); }
+    .month-nav-btn:disabled { opacity:.25; cursor:default; }
+    .score-right { text-align:right; }
+    .score-delta { font-size:14px; font-weight:600; display:flex; align-items:center; gap:3px; justify-content:flex-end; }
+    .score-delta.up { color:var(--green); }
+    .score-delta.down { color:var(--red); }
+    .score-abs { font-size:11px; color:var(--text-secondary); margin-top:3px; }
+    .sparkline-wrap { margin-top:10px; height:36px; }
+    .sparkline-wrap canvas { display:block; width:100%; }
+    .progress-wrap { margin-top:10px; }
+    .progress-header { display:flex; justify-content:space-between; font-size:11px; color:var(--text-secondary); margin-bottom:5px; }
+    .progress-bar { height:6px; background:var(--gray-border); border-radius:3px; overflow:hidden; }
+    .progress-fill { height:100%; background:var(--blue-mid); border-radius:3px; transition:width .6s ease; }
+    .toggle-row { display:flex; gap:6px; margin-top:10px; }
+    .toggle-btn { flex:1; padding:7px 8px; font-size:12px; border-radius:8px; border:1px solid var(--gray-border); background:var(--gray-bg); color:var(--text-secondary); cursor:pointer; text-align:center; font-weight:500; transition:all .15s; }
+    .toggle-btn.active { background:var(--blue-light); border-color:var(--blue-mid); color:var(--blue); }
+
+    /* ── TABLES ─────────────────────────────────── */
+    .tbl-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    table { width:100%; border-collapse:collapse; font-size:12px; }
+    th { font-size:11px; font-weight:600; color:var(--text-secondary); text-align:left; padding:4px 8px 8px; border-bottom:1px solid var(--gray-border); white-space:nowrap; }
+    td { padding:8px; border-bottom:1px solid #F0F0F0; color:var(--text); vertical-align:middle; }
+    tr:last-child td { border-bottom:none; }
+    .num { text-align:right; font-variant-numeric:tabular-nums; }
+    .profit-pos { color:var(--green); font-weight:600; }
+    .profit-neg { color:var(--red); font-weight:600; }
+
+    /* ── MONTH BAND ALTERNATION ─────────────────── */
+    tr.band-alt td { background:rgba(24,95,165,.03); }
+
+    /* ── SORTABLE SUMMARY ───────────────────────── */
+    .summary-scroll { max-height:360px; overflow:auto; -webkit-overflow-scrolling:touch; }
+    #summary-table thead th { position:sticky; top:0; background:var(--card-bg); z-index:2; border-bottom:none; box-shadow:0 1px 0 var(--gray-border); }
+    .sort-th { cursor:pointer; user-select:none; white-space:nowrap; }
+    .sort-th:hover { color:var(--blue-mid); }
+    .sort-th.sort-active { color:var(--blue); }
+
+    /* ── BADGES ─────────────────────────────────── */
+    .badge { display:inline-block; padding:2px 8px; border-radius:20px; font-size:10px; font-weight:600; white-space:nowrap; }
+    .badge-event { background:var(--purple-light); color:var(--purple-dark); }
+    .badge-promo { background:var(--teal-light); color:var(--teal-dark); }
+    .badge-trade { background:var(--amber-light); color:var(--amber-dark); }
+    .badge-new { background:#E8F5E9; color:#2E7D32; }
+
+    /* ── ACTIVITY TABS ──────────────────────────── */
+    .stab-row { display:flex; gap:6px; margin-bottom:10px; }
+    .stab { flex:1; padding:7px; font-size:12px; border-radius:8px; border:1px solid var(--gray-border); background:var(--gray-bg); color:var(--text-secondary); cursor:pointer; text-align:center; font-weight:500; transition:all .15s; }
+    .stab.active { background:var(--blue); border-color:var(--blue); color:white; }
+
+    /* ── SCROLLABLE ACTIVITY ────────────────────── */
+    .activity-scroll { max-height:300px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+    .listing-row { display:grid; grid-template-columns:1fr auto; gap:4px 10px; padding:7px 0; border-bottom:1px solid var(--gray-border); font-size:12px; }
+    .listing-row:last-child { border-bottom:none; }
+    .listing-name { font-weight:600; color:var(--text); }
+    .listing-meta { font-size:10px; color:var(--text-secondary); }
+    .listing-end  { font-size:11px; font-weight:600; text-align:right; }
+    .listing-fee  { font-size:10px; color:var(--text-secondary); text-align:right; }
+    .listing-desig { display:inline-block; font-size:9px; font-weight:600; padding:1px 6px; border-radius:10px; background:var(--blue-light); color:var(--blue); margin-left:4px; vertical-align:middle; }
+    .acct-closed-tag { font-size:9px; font-weight:600; color:#E57373; background:#FFF0F0; border-radius:4px; padding:1px 5px; margin-left:4px; vertical-align:middle; }
+    .listing-expired .listing-name,
+    .listing-expired .listing-end,
+    .listing-expired .listing-meta,
+    .listing-expired .listing-fee { color:#bbb; }
+    .listing-expired .listing-desig { background:#f0f0f0; color:#bbb; }
+    .listing-section-hd { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; }
+    .listing-expiry-warn { color:var(--amber-dark); }
+    .listing-expiry-urgent { color:var(--red); }
+
+    /* ── A&P TOOLTIP ────────────────────────────── */
+    .ap-tooltip-overlay { position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.35); display:flex; align-items:flex-end; }
+    .ap-tooltip-overlay.hidden { display:none; }
+    .ap-tooltip-sheet { background:#fff; border-radius:16px 16px 0 0; padding:20px 18px 32px; width:100%; max-height:50vh; overflow-y:auto; }
+    .ap-tooltip-close { float:right; background:none; border:none; font-size:22px; line-height:1; cursor:pointer; color:var(--text-secondary); margin:-4px -4px 0 0; }
+    .ap-tooltip-meta { font-size:11px; color:var(--text-secondary); margin-bottom:8px; }
+    .ap-tooltip-body { font-size:14px; line-height:1.6; color:var(--text); clear:both; }
+    td.desc-cell { cursor:pointer; }
+    td.desc-cell:active { background:var(--blue-light); }
+
+    /* ── BOTTOM NAV ─────────────────────────────── */
+    .bottom-nav { position:fixed; bottom:0; left:0; right:0; background:var(--header-bg); border-top:1px solid var(--gray-border); display:flex; padding:8px 0 max(10px,env(safe-area-inset-bottom)); z-index:50; }
+    .nav-item { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; font-size:10px; color:var(--text-secondary); cursor:pointer; }
+    .nav-item.active { color:var(--blue); }
+    .nav-item svg { width:22px; height:22px; stroke:currentColor; fill:none; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .nav-item-sm { flex:0 0 52px; font-size:9px; }
+    .nav-item-sm svg { stroke-width:1.6; }
+    .acct-sort-btn { padding:4px 10px; font-size:11px; border-radius:6px; border:1px solid var(--gray-border); background:var(--gray-bg); color:var(--text-secondary); cursor:pointer; }
+    .acct-sort-btn.active { background:var(--blue-light); border-color:var(--blue-mid); color:var(--blue); font-weight:600; }
+    /* Definitions page */
+    .def-section { margin-bottom:18px; }
+    .def-section:last-child { margin-bottom:0; }
+    .def-title { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px; }
+    .def-body { font-size:12px; color:var(--text-secondary); line-height:1.6; }
+    .def-formula { background:var(--gray-bg); border-left:3px solid var(--blue-mid); padding:8px 12px; border-radius:0 6px 6px 0; font-size:12px; font-family:monospace; margin:6px 0; color:var(--text); }
+    .score-breakdown { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:10px; }
+    .score-comp { border-radius:10px; padding:10px 12px; }
+    .score-comp-pts { font-size:20px; font-weight:700; }
+    .score-comp-name { font-size:12px; font-weight:600; margin:2px 0; }
+    .score-comp-rule { font-size:11px; color:var(--text-secondary); line-height:1.5; }
+    .order-link-btn { display:flex; align-items:center; justify-content:center; gap:8px; width:100%; padding:14px; background:var(--blue); color:white; border-radius:12px; font-size:15px; font-weight:600; text-decoration:none; margin-bottom:4px; }
+    .order-link-btn svg { width:18px; height:18px; stroke:white; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .confidence-pip { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:2px; }
+    .off-prem-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .off-prem-col { }
+    .off-prem-hd { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; margin-bottom:8px; padding:6px 10px; border-radius:8px; }
+    .off-prem-item { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--gray-border); font-size:12px; }
+    .off-prem-item:last-child { border-bottom:none; }
+    .off-prem-name { flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text); font-weight:500; }
+    .off-prem-type { font-size:10px; font-weight:600; padding:2px 6px; border-radius:6px; flex-shrink:0; margin-left:6px; }
+
+    /* ── ACCOUNT LIST PAGE ──────────────────────── */
+    .page-search { width:100%; padding:10px 14px; border:1px solid var(--gray-border); border-radius:10px; font-size:14px; background:var(--gray-bg); outline:none; margin-bottom:10px; }
+    .page-search:focus { border-color:var(--blue-mid); background:#fff; }
+    .acct-list { display:flex; flex-direction:column; gap:1px; }
+    .acct-list-item { display:flex; align-items:center; padding:12px 4px; border-bottom:1px solid #F0F0F0; cursor:pointer; gap:10px; }
+    .acct-list-item:last-child { border-bottom:none; }
+    .acct-list-item:active { background:var(--blue-light); border-radius:8px; }
+    .acct-list-body { flex:1; min-width:0; }
+    .acct-list-name { font-size:13px; font-weight:600; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .acct-list-sub { font-size:11px; color:var(--text-secondary); margin-top:2px; }
+    .acct-list-rev { font-size:13px; font-weight:600; color:var(--text); text-align:right; white-space:nowrap; }
+    .acct-list-arr { color:var(--gray-muted); font-size:16px; }
+    .acct-list-header { display:flex; justify-content:space-between; align-items:center; padding:4px 4px 8px; border-bottom:1px solid var(--gray-border); margin-bottom:2px; }
+    .acct-list-header span { font-size:11px; font-weight:600; color:var(--text-secondary); text-transform:uppercase; letter-spacing:.06em; }
+    .acct-list-header span:last-child { margin-right:26px; } /* align with revenue column, offset for › */
+    .acct-empty { text-align:center; color:var(--text-secondary); font-size:13px; padding:28px 0; }
+
+    /* ── INSIGHTS PAGE ──────────────────────────── */
+    /* Health score leaderboard */
+    .score-row { display:flex; align-items:center; gap:9px; padding:9px 0; border-bottom:1px solid var(--gray-border); cursor:pointer; }
+    .score-row:last-child { border-bottom:none; }
+    .score-row:active { background:var(--gray-bg); margin:0 -14px; padding:9px 14px; border-radius:8px; }
+    .score-rank { font-size:11px; font-weight:700; color:var(--text-secondary); width:16px; flex-shrink:0; text-align:right; }
+    .score-name { flex:1; font-size:13px; font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .score-bar-track { width:72px; flex-shrink:0; height:6px; background:var(--gray-border); border-radius:3px; overflow:hidden; }
+    .score-bar-fill { height:100%; border-radius:3px; transition:width .4s; }
+    .score-badge { font-size:12px; font-weight:700; width:28px; text-align:right; flex-shrink:0; }
+    .score-badge.hi { color:var(--green); } .score-badge.mid { color:var(--amber-dark); } .score-badge.lo { color:var(--red); }
+    /* Recency grid */
+    .recency-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+    .recency-cell { background:var(--gray-bg); border-radius:10px; padding:12px 10px; }
+    .recency-count { font-size:26px; font-weight:700; line-height:1; }
+    .recency-label { font-size:11px; color:var(--text-secondary); margin-top:3px; }
+    .recency-dot { display:inline-block; width:7px; height:7px; border-radius:50%; margin-right:4px; vertical-align:middle; }
+    .recency-tags { margin-top:10px; display:flex; flex-wrap:wrap; gap:4px; }
+    .recency-tag { font-size:11px; padding:2px 8px; border-radius:10px; }
+    /* Shared bar rows */
+    .ins-row { display:flex; align-items:center; gap:8px; padding:8px 0; border-bottom:1px solid var(--gray-border); font-size:12px; }
+    .ins-row:last-child { border-bottom:none; }
+    .ins-name { flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text); font-weight:500; }
+    .ins-bar-track { width:64px; flex-shrink:0; height:6px; background:var(--gray-border); border-radius:3px; overflow:hidden; }
+    .ins-bar-fill { height:100%; border-radius:3px; transition:width .4s; }
+    .ins-val { width:56px; text-align:right; flex-shrink:0; color:var(--text-secondary); font-size:11px; }
+    /* Status classification matrix */
+    .status-matrix-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; margin-bottom:12px; }
+    .status-matrix { width:100%; border-collapse:collapse; font-size:11px; }
+    .status-matrix th, .status-matrix td { padding:6px 4px; text-align:center; border:1px solid var(--gray-border); }
+    .status-axis { background:var(--gray-bg); font-weight:600; color:var(--text-secondary); font-size:10px; text-transform:uppercase; letter-spacing:.04em; width:52px; }
+    .status-col-hdr { background:var(--gray-bg); font-weight:600; color:var(--text-secondary); font-size:10px; }
+    .status-row-hdr { font-weight:700; font-size:11px; text-align:left; padding-left:6px; }
+    .sold-hdr   { color:var(--green); background:var(--green-light); }
+    .unsold-hdr { color:var(--red);   background:var(--red-light); }
+    .status-cell { font-weight:600; font-size:11px; border-radius:0; cursor:default; position:relative; }
+    /* Sold row — greens/teals */
+    .s-active    { background:#D4EDDA; color:#155724; }
+    .s-refreshed { background:#C8E6F5; color:#0C5460; }
+    .s-revived   { background:#D1ECF1; color:#0C5460; }
+    .s-new       { background:#E1F5EE; color:var(--teal-dark); }
+    /* Unsold row — ambers/reds */
+    .s-idle      { background:#FFF3CD; color:#856404; }
+    .s-dormant   { background:#FAEEDA; color:var(--amber-dark); }
+    .s-closed    { background:#FCEBEB; color:var(--red); }
+    .s-prosp     { background:#F0F0F0; color:#555; }
+    /* Live count badge overlaid on each cell */
+    .status-cell .sc-badge { display:block; font-size:9px; font-weight:400; margin-top:1px; opacity:.75; }
+    /* Live breakdown list below matrix */
+    .status-live-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:4px; }
+    .status-live-cell { border-radius:8px; padding:8px 10px; border:1px solid var(--gray-border); }
+    .status-live-hd { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+    .status-live-name { font-size:11px; font-weight:700; }
+    .status-live-count { font-size:18px; font-weight:700; }
+    .status-live-list { font-size:10px; color:var(--text-secondary); line-height:1.5; }
+    /* Momentum */
+    .mom-section-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; padding:8px 0 4px; color:var(--text-secondary); }
+    .mom-row { display:flex; align-items:center; gap:8px; padding:7px 0; border-bottom:1px solid var(--gray-border); font-size:12px; }
+    .mom-row:last-child { border-bottom:none; }
+    .mom-arrow { font-size:13px; flex-shrink:0; width:14px; }
+    .mom-pct { width:44px; text-align:right; flex-shrink:0; font-weight:700; font-size:12px; }
+    .mom-pct.up { color:var(--green); } .mom-pct.dn { color:var(--red); }
+    .mom-sub { font-size:10px; color:var(--text-secondary); flex-shrink:0; }
+    .insight-kpi-lbl { font-size:11px; color:var(--text-secondary); margin-top:2px; }
+
+    /* ── SCROLLABLE INSIGHT LISTS ───────────────── */
+    .ins-scroll { max-height:264px; overflow-y:auto; -webkit-overflow-scrolling:touch; }
+
+    /* ── MOMENTUM $ PRIMARY ─────────────────────── */
+    .mom-delta { font-size:13px; font-weight:700; flex-shrink:0; white-space:nowrap; }
+    .mom-delta.up { color:var(--green); }
+    .mom-delta.dn { color:var(--red); }
+    .mom-pct-sm { font-size:10px; color:var(--text-secondary); flex-shrink:0; white-space:nowrap; }
+
+    /* ── STATUS PAGE — SUMMARY CARDS ───────────── */
+    .status-summary-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:4px; }
+    .status-summary-card { border-radius:12px; padding:10px 12px; cursor:pointer; display:flex; flex-direction:column; gap:1px; border:2px solid transparent; transition:opacity .15s, box-shadow .15s; -webkit-tap-highlight-color:transparent; user-select:none; }
+    .status-summary-card:active { opacity:.8; }
+    .status-summary-card.highlight { box-shadow:0 0 0 2px rgba(0,0,0,.3); border-color:rgba(0,0,0,.15); }
+    .status-card-icon { font-size:14px; margin-bottom:2px; }
+    .status-card-count { font-size:26px; font-weight:700; line-height:1.1; }
+    .status-card-name { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; opacity:.8; }
+    /* ── STATUS DETAIL SHEET ────────────────────── */
+    .status-detail-overlay { position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.35); display:flex; align-items:flex-end; }
+    .status-detail-overlay.hidden { display:none; }
+    .status-detail-sheet { background:#fff; border-radius:16px 16px 0 0; width:100%; max-height:75vh; display:flex; flex-direction:column; border-top:3px solid var(--blue); }
+    .status-detail-header { padding:14px 18px 10px; border-bottom:1px solid var(--gray-border); display:flex; justify-content:space-between; align-items:flex-start; flex-shrink:0; }
+    .status-detail-title { font-size:16px; font-weight:700; }
+    .status-detail-sub { font-size:12px; color:var(--text-secondary); margin-top:2px; }
+    .status-detail-close { background:none; border:none; font-size:24px; line-height:1; cursor:pointer; color:var(--text-secondary); padding:0; }
+    .status-detail-list { overflow-y:auto; -webkit-overflow-scrolling:touch; flex:1; }
+    .status-detail-item { padding:12px 18px; font-size:13px; border-bottom:1px solid #F5F5F5; color:var(--text); }
+    .status-detail-item:last-child { border-bottom:none; }
+
+    /* ── LOADING / EMPTY ────────────────────────── */
+    .skeleton { background:linear-gradient(90deg,#F0F0F0 25%,#E8E8E8 50%,#F0F0F0 75%); background-size:200% 100%; animation:shimmer 1.2s infinite; border-radius:6px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    .empty-state { text-align:center; color:var(--text-secondary); font-size:13px; padding:24px 0; }
+    .hidden { display:none !important; }
+
+    /* ── FY / CY TOGGLE ─────────────────────────── */
+    .fy-toggle-row { display:flex; justify-content:flex-end; margin-bottom:-4px; }
+    .fy-toggle { display:flex; background:var(--gray-bg); border:1px solid var(--gray-border); border-radius:8px; padding:2px; gap:2px; }
+    .fy-btn { padding:4px 16px; font-size:12px; font-weight:600; border:none; background:none; border-radius:6px; cursor:pointer; color:var(--text-secondary); transition:all .15s; }
+    .fy-btn.active { background:var(--blue); color:white; }
+
+    /* ── PRINT ──────────────────────────────────── */
+    @media print {
+      /* Hide all interactive chrome */
+      .bottom-nav, .header .acct-wrap, .header .group-chips, .toggle-row,
+      .month-nav-btn, .icon-btn, .logout-btn, .stab-row,
+      .fy-toggle-row, #on-prem-chip, #header-filters { display:none !important; }
+
+      /* Base */
+      body { background:white; font-size:10px; }
+      .header { position:static; border:none; padding:4px 0 2px; }
+      .scroll-area { padding:0 0 0 0; overflow:visible; }
+
+      /* Cards — no scrolling, no break inside */
+      .card { border:1px solid #ddd; break-inside:avoid; margin-bottom:6px; page-break-inside:avoid; }
+      .score-value { font-size:18px; }
+      .score-label { font-size:9px; }
+
+      /* ── PAGE 1: scorecards + 8-row summary table ── */
+      .summary-scroll { max-height:none; overflow:visible; }
+      /* Shrink scorecard grid to single row so it fits compactly */
+      .score-grid { gap:6px; }
+
+      /* ── PAGE 2: recent activity ── */
+      /* Force the activity card onto a new page */
+      .card.activity-card { page-break-before:always; break-before:page; }
+      .activity-scroll { max-height:none; overflow:visible; }
+      #panel-sales .tbl-scroll,
+      #panel-ap   .tbl-scroll { max-height:none; overflow:visible; }
+
+      /* Table rows compact */
+      table { font-size:10px; }
+      th, td { padding:3px 6px; }
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <div class="monogram">M &nbsp;·&nbsp; N</div>
-    <h1>With Gratitude</h1>
-    <div class="date">1 · May · 2026</div>
-    <div class="divider"></div>
-    <p class="message">
-      Thank you for blessing our union with your presence, your love, and your generosity. Here are a few keepsakes from the day, full album to follow!
-    </p>
-    <div class="links">
-      <a href="https://eerik.pic-time.com/-mikeandnat/gallery" target="_blank" rel="noopener" class="link-card">
-        <div class="link-label">View</div>
-        <div class="link-title">Pre-Wedding Shoot</div>
-      </a>
-      <a href="https://drive.google.com/drive/folders/1a0Arv9GekZC4lR4DG0AMBSjXI4YYwS5T" target="_blank" rel="noopener" class="link-card">
-        <div class="link-label">Watch</div>
-        <div class="link-title">Ceremony Snapshot</div>
-      </a>
-      <a href="https://www.dropbox.com/scl/fi/j5bfxw5hv04auilwsp3h7/Singapore-Dinner-Trailer-with-Intro.mp4?rlkey=viypf4dhuj36zxuzcrr0zmkxm&dl=0" target="_blank" rel="noopener" class="link-card">
-        <div class="link-label">Watch</div>
-        <div class="link-title">Wedding Trailer</div>
-      </a>
-      <a href="https://eerik.pic-time.com/client/natalie--mike" target="_blank" rel="noopener" class="link-card">
-        <div class="link-label">View</div>
-        <div class="link-title">Sneak-Peek Photos</div>
-      </a>
+
+  <!-- ═══ LOGIN ════════════════════════════════════ -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h18v4H3zM3 10h11v4H3zM3 17h14v4H3z"/></svg>
+      </div>
+      <h1 class="login-title">Codigo1530</h1>
+      <p class="login-sub">Sales Dashboard — Field Access</p>
+      <label class="login-label" for="password-input">Access code</label>
+      <input id="password-input" class="login-input" type="password" placeholder="Enter your access code" autocomplete="current-password" />
+      <button class="login-btn" id="login-btn" onclick="doLogin()">Sign in</button>
+      <p class="login-error" id="login-error">Incorrect access code. Try again.</p>
     </div>
-    <div class="signature">
-      With love,<br>
-      Michael &amp; Natalie
-    </div>
-    <p class="footer-note">
-      Full album coming soon.
-    </p>
   </div>
+
+  <!-- ═══ MAIN APP ═════════════════════════════════ -->
+  <div id="app">
+
+    <div class="header">
+      <div class="header-top">
+        <div>
+          <div class="header-title">Sales Dashboard</div>
+          <div class="header-date" id="header-date"></div>
+        </div>
+        <div class="header-actions">
+          <button class="icon-btn" onclick="doPrint()" title="Print">
+            <svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          </button>
+          <button class="icon-btn" onclick="doLogout()">Sign out</button>
+        </div>
+      </div>
+      <div id="header-filters">
+        <div class="acct-wrap" id="acct-wrap">
+          <div class="acct-input-row">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <circle cx="6.5" cy="6.5" r="4" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 10l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input type="text" class="acct-search-input" id="acct-search" placeholder="All accounts"
+              autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Search accounts"
+              oninput="filterAccounts()" onfocus="openAcctDropdown()" />
+            <button class="acct-clear" id="acct-clear" aria-label="Clear selection" onclick="clearAcctSearch()">×</button>
+          </div>
+          <div class="acct-dropdown" id="acct-dropdown" role="listbox">
+            <div class="acct-option selected" data-value="__all__" onclick="selectAccount('__all__', '')">All accounts</div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 0">
+          <div class="group-chips" id="group-chips" style="flex-shrink:0;padding:0;overflow:visible">
+            <div class="group-chip active" data-value="__all__" onclick="selectGroup('__all__')">All</div>
+          </div>
+          <div style="flex-shrink:0;width:1px;height:20px;background:var(--gray-border);margin:0 2px"></div>
+          <div class="group-chip" id="on-prem-chip" onclick="toggleOnPremise()" style="flex-shrink:0;display:flex;align-items:center;gap:4px">
+            <span>🏢</span> On-premise
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-area" id="scroll-area">
+
+      <!-- ── DASHBOARD PAGE ─────────────────────── -->
+      <div class="page active" id="page-dashboard">
+
+        <!-- FY / CY toggle -->
+        <div class="fy-toggle-row">
+          <div class="fy-toggle">
+            <button class="fy-btn" id="btn-cy" onclick="setYearMode('cy')">CY</button>
+            <button class="fy-btn active" id="btn-fy" onclick="setYearMode('fy')">FY</button>
+          </div>
+        </div>
+
+        <!-- MTD Scorecard -->
+        <div class="card">
+          <div class="card-label">MTD Revenue</div>
+          <div class="score-inner">
+            <div class="score-main">
+              <div>
+                <div class="score-value" id="mtd-value">—</div>
+                <div class="score-period-row">
+                  <button class="month-nav-btn" id="mtd-prev" onclick="navigateMTD(-1)">‹</button>
+                  <div class="score-period" id="mtd-period"></div>
+                  <button class="month-nav-btn" id="mtd-next" onclick="navigateMTD(1)">›</button>
+                </div>
+              </div>
+              <div class="score-right">
+                <div class="score-delta" id="mtd-delta">—</div>
+                <div class="score-abs" id="mtd-abs"></div>
+              </div>
+            </div>
+            <div class="sparkline-wrap">
+              <canvas id="mtd-spark" height="36"></canvas>
+            </div>
+          </div>
+          <div class="toggle-row">
+            <button class="toggle-btn active" id="btn-mom" onclick="setMTDMode('mom')">vs Prior Month (M-1)</button>
+            <button class="toggle-btn" id="btn-yoy-mtd" onclick="setMTDMode('yoy')">vs Prior Year (Y-1)</button>
+          </div>
+        </div>
+
+        <!-- YTD Scorecard -->
+        <div class="card">
+          <div class="card-label">YTD Revenue</div>
+          <div class="score-inner">
+            <div class="score-main">
+              <div>
+                <div class="score-value" id="ytd-value">—</div>
+                <div class="score-period" id="ytd-period"></div>
+              </div>
+              <div class="score-right">
+                <div class="score-delta" id="ytd-delta">—</div>
+                <div class="score-abs" id="ytd-abs"></div>
+              </div>
+            </div>
+            <div class="progress-wrap">
+              <div class="progress-header">
+                <span>vs annual target</span>
+                <span id="ytd-target-pct">—</span>
+              </div>
+              <div class="progress-bar"><div class="progress-fill" id="ytd-progress" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Summary -->
+        <div class="card">
+          <div class="card-label">Account Summary <span id="summary-context" style="font-weight:400;text-transform:none;letter-spacing:0"></span></div>
+          <div class="summary-scroll">
+            <table id="summary-table">
+              <colgroup>
+                <col><!-- account: takes remaining space -->
+                <col style="width:62px"><!-- Revenue -->
+                <col style="width:56px"><!-- COGS -->
+                <col style="width:44px"><!-- A&P -->
+                <col style="width:62px"><!-- Profit -->
+              </colgroup>
+              <thead><tr></tr></thead>
+              <tbody id="summary-body"><tr><td colspan="5" class="empty-state">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card activity-card">
+          <div class="card-label">Recent Activity</div>
+          <div class="stab-row">
+            <button class="stab active" id="stab-sales" onclick="switchTab('sales')">Sales</button>
+            <button class="stab" id="stab-ap" onclick="switchTab('ap')">A&amp;P</button>
+          </div>
+          <div id="panel-sales">
+            <div class="activity-scroll">
+              <div class="tbl-scroll">
+                <table>
+                  <thead><tr><th>Date</th><th>Account</th><th>SKU</th><th class="num">Pcs</th><th class="num">Revenue</th></tr></thead>
+                  <tbody id="sales-body"><tr><td colspan="5" class="empty-state">Loading…</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div id="panel-ap" class="hidden">
+            <div class="activity-scroll">
+              <div class="tbl-scroll">
+                <table>
+                  <thead><tr><th>Date</th><th>Account</th><th>Type</th><th>Description</th><th class="num">SGD</th></tr></thead>
+                  <tbody id="ap-body"><tr><td colspan="5" class="empty-state">Loading…</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end page-dashboard -->
+
+      <!-- ── ACCOUNTS PAGE ──────────────────────── -->
+      <div class="page" id="page-accounts">
+        <div class="card">
+          <input type="text" class="page-search" id="accts-search" placeholder="Search accounts…" oninput="filterAccountsList()" autocomplete="off" />
+          <div class="stab-row">
+            <button class="stab" id="stab-off" onclick="switchAcctsTab('off')">Off Premise</button>
+            <button class="stab active" id="stab-on" onclick="switchAcctsTab('on')">On Premise</button>
+            <button class="stab" id="stab-new" onclick="switchAcctsTab('new')">New Accounts</button>
+            <button class="stab" id="stab-listings" onclick="switchAcctsTab('listings')">Listings</button>
+          </div>
+          <div id="accts-sort-row" style="display:flex;gap:6px;margin-bottom:8px;align-items:center">
+            <span style="font-size:11px;color:var(--text-secondary);flex-shrink:0">Sort:</span>
+            <button class="acct-sort-btn active" data-sort="name" onclick="setAcctSort('name')">A–Z</button>
+            <button class="acct-sort-btn" data-sort="rev" onclick="setAcctSort('rev')">Revenue</button>
+            <button class="acct-sort-btn" data-sort="tenure" onclick="setAcctSort('tenure')">Tenure</button>
+          </div>
+          <div class="acct-list hidden" id="accts-off-list" style="max-height:calc(100vh - 320px);overflow-y:auto;-webkit-overflow-scrolling:touch"></div>
+          <div class="acct-list" id="accts-on-list" style="max-height:calc(100vh - 320px);overflow-y:auto;-webkit-overflow-scrolling:touch"></div>
+          <div class="acct-list hidden" id="accts-new-list" style="max-height:calc(100vh - 320px);overflow-y:auto;-webkit-overflow-scrolling:touch"></div>
+          <div class="acct-list hidden" id="accts-listings-list" style="max-height:calc(100vh - 320px);overflow-y:auto;-webkit-overflow-scrolling:touch">
+            <div class="card" id="listings-card" style="box-shadow:none;border:none;padding:0;margin:0">
+              <div id="listings-active"></div>
+              <div id="listings-expired" style="margin-top:10px"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── STATUS PAGE ──────────────────────── -->
+      <div class="page" id="page-status">
+        <div class="card" id="status-page-content">
+          <div class="empty-state" style="padding:24px 0">Loading…</div>
+        </div>
+      </div>
+
+      <!-- ── INSIGHTS PAGE ──────────────────────── -->
+      <div class="page" id="page-insights">
+
+        <!-- 0. Monthly Revenue Trend -->
+        <div class="card">
+          <div class="card-label">Monthly Revenue Trend <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-secondary)">— last 12 months</span></div>
+          <div id="ins-trend"></div>
+        </div>
+
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--text-secondary);padding:2px 0 4px">On-Premise Accounts</div>
+
+        <!-- 1. Account Health Score -->
+        <div class="card">
+          <div class="card-label">Account Health Score <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-secondary)">— on-premise only · tap to open</span></div>
+          <div id="ins-scores"></div>
+        </div>
+
+        <!-- 3. Momentum -->
+        <div class="card">
+          <div class="card-label">Momentum <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-secondary)">— last 3M vs prior 3M</span></div>
+          <div id="ins-momentum"></div>
+        </div>
+
+        <!-- 4. Order Cadence -->
+        <div class="card">
+          <div class="card-label">Order Cadence <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-secondary)">— 3+ active months</span></div>
+          <div id="ins-cadence"></div>
+        </div>
+
+        <!-- 5. Basket Size -->
+        <div class="card">
+          <div class="card-label">Basket Size <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-secondary)">— avg monthly spend with confidence</span></div>
+          <div id="ins-basket"></div>
+        </div>
+
+      </div><!-- end page-insights -->
+
+      <!-- ── ALERTS PAGE ───────────────────────── -->
+      <div class="page" id="page-alerts">
+        <!-- Win-back -->
+        <div class="card">
+          <div class="card-label">Win-Back Targets <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-secondary)">— dormant · by peak profit</span></div>
+          <div id="alert-winback"></div>
+        </div>
+        <!-- At-risk -->
+        <div class="card">
+          <div class="card-label">At-Risk <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-secondary)">— active last month, not yet this month</span></div>
+          <div id="alert-atrisk"></div>
+        </div>
+        <!-- Overdue reorder -->
+        <div class="card">
+          <div class="card-label">Overdue Reorder <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-secondary)">— past 95% of avg reorder cycle</span></div>
+          <div id="alert-overdue"></div>
+        </div>
+      </div><!-- end page-alerts -->
+
+      <!-- ── DEFINITIONS / GUIDE PAGE ──────────── -->
+      <div class="page" id="page-definitions">
+
+        <!-- Ordering link CTA -->
+        <div class="card">
+          <div class="card-label">Place an Order</div>
+          <a class="order-link-btn" href="https://codigo1530.com.sg/pages/shop" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 001.99 1.61H19a2 2 0 001.97-1.67L23 6H6"/></svg>
+            Open Codigo1530 Shop
+          </a>
+          <div style="font-size:11px;color:var(--text-secondary);text-align:center">codigo1530.com.sg/pages/shop</div>
+        </div>
+
+        <!-- Health Score Breakdown -->
+        <div class="card">
+          <div class="card-label">Health Score — How It's Calculated</div>
+          <div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px">Five components × 20 pts = 100. On-premise accounts only. Gating and smoothing ensure new accounts can't inflate their score before earning it.</div>
+          <div class="score-breakdown">
+            <div class="score-comp" style="background:#EAF3DE">
+              <div class="score-comp-pts" style="color:var(--green)">20 pts</div>
+              <div class="score-comp-name">Recency</div>
+              <div class="score-comp-rule"><em>Gated</em> — 0 until 2nd active month.<br><br>20 = this month<br>16 = &lt;60 d · 12 = &lt;90 d<br>6 = &lt;120 d · 2 = &lt;180 d<br>0 = 180+ days</div>
+            </div>
+            <div class="score-comp" style="background:#E6F1FB">
+              <div class="score-comp-pts" style="color:var(--blue)">20 pts</div>
+              <div class="score-comp-name">Cadence</div>
+              <div class="score-comp-rule"><em>Smoothed</em> — 3 prior months added so 1st order scores ~5 pts, not 20.<br><br>Active ÷ (Tenure + 3) × 20<br>e.g. 8 of 10 mo → 8÷13 = 12 pts</div>
+            </div>
+            <div class="score-comp" style="background:#EEEDFE">
+              <div class="score-comp-pts" style="color:var(--purple-dark)">20 pts</div>
+              <div class="score-comp-name">Streak</div>
+              <div class="score-comp-rule">Consecutive months ordering, from most recent backward. Full 20 pts at 12 months.<br><br>6 mo = 10 pts · 3 mo = 5 pts · 1 mo = 2 pts</div>
+            </div>
+            <div class="score-comp" style="background:#FAEEDA">
+              <div class="score-comp-pts" style="color:var(--amber-dark)">20 pts</div>
+              <div class="score-comp-name">Momentum</div>
+              <div class="score-comp-rule"><em>Gated</em> — requires 2+ active months. No prior period = no trend.<br><br>Last 3M vs prior 3M revenue. Growth = higher pts, decline = lower.</div>
+            </div>
+            <div class="score-comp" style="background:#E1F5EE">
+              <div class="score-comp-pts" style="color:var(--teal-dark)">20 pts</div>
+              <div class="score-comp-name">Basket Value</div>
+              <div class="score-comp-rule"><em>Smoothed</em> vs portfolio average.<br><br>2× avg or above = 20 pts<br>At avg = 10 pts<br>Below avg scales down<br><br>Uses same Laplace smoothing as the Basket Size chart.</div>
+            </div>
+          </div>
+          <div style="margin-top:12px;font-size:11px;color:var(--text-secondary);line-height:1.7">
+            <strong style="color:var(--text)">First order score: ~5/100.</strong> Recency and momentum are gated (0). Cadence smoothed to ~5. Streak 2 pts. Basket value pulls toward the portfolio mean (~10 pts) but is smoothed low with little data. An account needs sustained performance across all five dimensions to reach 70+.<br><br>
+            Score tiers: <span style="color:var(--green);font-weight:600">● 70–100 Strong</span> · <span style="color:var(--amber-dark);font-weight:600">● 40–69 Developing</span> · <span style="color:var(--red);font-weight:600">● 0–39 Needs attention</span>
+          </div>
+        </div>
+
+        <!-- Status Classification reference -->
+        <div class="card">
+          <div class="card-label">Account Status Classification — Reference</div>
+          <div class="status-matrix-wrap">
+            <table class="status-matrix">
+              <thead>
+                <tr>
+                  <th class="status-axis">This Month</th>
+                  <th class="status-col-hdr">&lt; 60 days</th>
+                  <th class="status-col-hdr">60–365 days</th>
+                  <th class="status-col-hdr">365 days+</th>
+                  <th class="status-col-hdr">Never</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="status-row-hdr sold-hdr">Sold ✓</td>
+                  <td class="status-cell s-active">Active</td>
+                  <td class="status-cell s-refreshed">Refreshed</td>
+                  <td class="status-cell s-revived">Revived</td>
+                  <td class="status-cell s-new">New</td>
+                </tr>
+                <tr>
+                  <td class="status-row-hdr unsold-hdr">Unsold ✗</td>
+                  <td class="status-cell s-idle">Idle</td>
+                  <td class="status-cell s-dormant">Dormant</td>
+                  <td class="status-cell s-closed">Closed</td>
+                  <td class="status-cell s-prosp">Prospect</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="margin-top:10px;display:flex;flex-direction:column;gap:5px">
+            <div style="font-size:11px;color:var(--text-secondary)"><strong style="color:var(--text)">Sold this month</strong> = at least one order dated in the current calendar month.</div>
+            <div style="font-size:11px;color:var(--text-secondary)"><strong style="color:var(--text)">Last bought</strong> = days since the most recent order in the dataset (pre-BOM days).</div>
+            <div style="font-size:11px;color:var(--text-secondary)"><strong style="color:var(--green)">Revived / Refreshed</strong> = sold this month after a significant gap — these warrant celebrating.</div>
+            <div style="font-size:11px;color:var(--text-secondary)"><strong style="color:var(--red)">Closed / Dormant</strong> = unsold with a long gap — priority re-engagement targets.</div>
+          </div>
+        </div>
+
+        <!-- Metric definitions -->
+        <div class="card">
+          <div class="card-label">Metric Definitions</div>
+
+          <div class="def-section">
+            <div class="def-title">Order Cadence</div>
+            <div class="def-body">How reliably an account orders each month, regardless of order size. Only shown for accounts with 3+ active months so a single sell-in doesn't inflate the score.</div>
+            <div class="def-formula">Cadence = Active Months ÷ Tenure Months × 100%<br>e.g. 8 orders across 12 months = 67% cadence</div>
+            <div class="def-body">A high-cadence account is a reliable reorder partner. A low-cadence account with high basket size may be a special-occasion buyer.</div>
+          </div>
+
+          <div class="def-section">
+            <div class="def-title">Basket Size (with Confidence)</div>
+            <div class="def-body">Average monthly spend per active month. For accounts with few data points, raw averages are unreliable — a single large order skews everything. We apply <strong>Laplace smoothing</strong> (Bayesian prior) to pull thin estimates toward the portfolio average.</div>
+            <div class="def-formula">Smoothed Basket = (k × μ₀ + Σ revenue) ÷ (k + n)<br>where μ₀ = portfolio avg basket, k = 3 (prior weight), n = active months</div>
+            <div class="def-body">Confidence indicator reflects how many data months we have:<br>
+              ●●● High = 6+ months · ●●○ Medium = 3–5 months · ●○○ Low = 1–2 months</div>
+          </div>
+
+          <div class="def-section">
+            <div class="def-title">Momentum</div>
+            <div class="def-body">Compares revenue in the most recent 3 calendar months against the prior 3 months. Captures trajectory rather than absolute size — a small account growing fast scores better than a large account declining.</div>
+            <div class="def-formula">Momentum % = (Last 3M Revenue − Prior 3M Revenue) ÷ Prior 3M Revenue × 100</div>
+            <div class="def-body">New accounts with no prior 3M revenue are shown separately as "NEW" risers.</div>
+          </div>
+
+          <div class="def-section">
+            <div class="def-title">Tenure &amp; Streak</div>
+            <div class="def-body"><strong>Tenure</strong> = months between first order and today (total relationship length).<br>
+            <strong>Active Months</strong> = distinct calendar months with at least one order.<br>
+            <strong>Streak</strong> = the longest run of <em>consecutive</em> months with orders, measured from the most recent month backward. A 🔥 badge appears for streaks of 3+ months.</div>
+          </div>
+        </div>
+
+      </div><!-- end page-definitions -->
+
+    </div><!-- end scroll-area -->
+
+    <nav class="bottom-nav" style="--nav-fs:9px">
+      <div class="nav-item active" id="nav-dashboard" onclick="showPage('dashboard')" style="font-size:var(--nav-fs)">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item" id="nav-accounts" onclick="showPage('accounts')" style="font-size:var(--nav-fs)">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Accounts</span>
+      </div>
+      <div class="nav-item" id="nav-status" onclick="showPage('status')" style="font-size:var(--nav-fs)">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+        <span>Status</span>
+      </div>
+      <div class="nav-item" id="nav-insights" onclick="showPage('insights')" style="font-size:var(--nav-fs)">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span>Insights</span>
+      </div>
+      <div class="nav-item" id="nav-alerts" onclick="showPage('alerts')" style="font-size:var(--nav-fs)">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span>Alerts</span>
+      </div>
+      <div class="nav-item" id="nav-definitions" onclick="showPage('definitions')" style="font-size:var(--nav-fs)">
+        <svg viewBox="0 0 24 24" style="width:20px;height:20px"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17" stroke-width="2.5"/></svg>
+        <span>Guide</span>
+      </div>
+    </nav>
+
+  </div><!-- end #app -->
+
+  <!-- Status Detail Sheet -->
+  <div class="status-detail-overlay hidden" id="status-detail-overlay" onclick="closeStatusDetail(event)">
+    <div class="status-detail-sheet" id="status-detail-sheet" onclick="event.stopPropagation()">
+      <div class="status-detail-header">
+        <div>
+          <div class="status-detail-title" id="status-detail-title"></div>
+          <div class="status-detail-sub" id="status-detail-sub"></div>
+        </div>
+        <button class="status-detail-close" onclick="closeStatusDetail()">×</button>
+      </div>
+      <div class="status-detail-list" id="status-detail-list"></div>
+    </div>
+  </div>
+
+  <!-- A&P Tooltip Sheet -->
+  <div class="ap-tooltip-overlay hidden" id="ap-tooltip-overlay" onclick="closeAPTooltip(event)">
+    <div class="ap-tooltip-sheet" onclick="event.stopPropagation()">
+      <button class="ap-tooltip-close" onclick="closeAPTooltip()">×</button>
+      <div class="ap-tooltip-meta" id="ap-tooltip-meta"></div>
+      <div class="ap-tooltip-body" id="ap-tooltip-body"></div>
+    </div>
+  </div>
+
+  <script>
+    // ═══════════════════════════════════════════════
+    // STATE
+    // ═══════════════════════════════════════════════
+    const TOKEN_KEY = 'c1530_token';
+
+    let maxDate = new Date(); maxDate.setHours(0,0,0,0);
+    let mtdViewDate = null; // initialized after data load
+
+    let rawSales = [], rawAP = [], rawListing = [];
+    let closedAccounts = new Set(); // account names marked Closed in Doorlist
+    let mtdMode = 'mom';
+    let annualTarget = 0;
+    let currentAccount = '__all__';
+    let currentGroup   = '__all__';
+    let summarySort    = { col: 'rev', dir: -1 };
+    let currentPage    = 'dashboard';
+    let acctsMeta      = {};   // account → { premise, firstOrder, lastOrder, ytdRev, mtdRev }
+    let acctsTab       = 'on';
+    let yearMode       = 'fy'; // 'fy' = 1 Jul, 'cy' = 1 Jan
+    let insightsCache  = null; // built once after data loads; reset on reload
+    let onPremiseOnly  = false;
+
+    // ═══════════════════════════════════════════════
+    // SHARED CONSTANTS & PURE HELPERS
+    // ═══════════════════════════════════════════════
+    const STATUS_DEF = {
+      Active:      { bg:'#D4EDDA', color:'#155724',          icon:'✓' },
+      Idle:        { bg:'#FFF3CD', color:'#856404',          icon:'~' },
+      Refreshed:   { bg:'#C8E6F5', color:'#0C5460',          icon:'↩' },
+      Dormant:     { bg:'#FAEEDA', color:'var(--amber-dark)', icon:'…' },
+      Revived:     { bg:'#D1ECF1', color:'#0C5460',          icon:'↑' },
+      Closed:      { bg:'#FCEBEB', color:'var(--red)',        icon:'✕' },
+      New:         { bg:'#E1F5EE', color:'var(--teal-dark)', icon:'★' },
+      Prospective: { bg:'#F0F0F0', color:'#555',             icon:'?' },
+    };
+    const ON_STATUS_ORDER = ['Active','Idle','Refreshed','Dormant','Revived','Closed','New','Prospective'];
+
+    function calcStreak(months) {
+      // Current streak: consecutive months counting back from most recent
+      const sorted = [...months].sort().reverse();
+      if (!sorted.length) return 0;
+      let s = 1;
+      for (let i = 0; i < sorted.length - 1; i++) {
+        const [y1,m1] = sorted[i].split('-').map(Number);
+        const [y2,m2] = sorted[i+1].split('-').map(Number);
+        if ((y1*12+m1) - (y2*12+m2) === 1) s++;
+        else break;
+      }
+      return s;
+    }
+
+    function calcMaxStreak(months) {
+      // Historical best: longest consecutive run anywhere in history
+      const sorted = [...months].sort(); // ascending
+      if (!sorted.length) return 0;
+      let maxS = 1, cur = 1;
+      for (let i = 1; i < sorted.length; i++) {
+        const [y1,m1] = sorted[i-1].split('-').map(Number);
+        const [y2,m2] = sorted[i].split('-').map(Number);
+        if ((y2*12+m2) - (y1*12+m1) === 1) { cur++; if (cur > maxS) maxS = cur; }
+        else cur = 1;
+      }
+      return maxS;
+    }
+
+    function classifyAccount(daysSince, sold) {
+      if (sold) {
+        if (daysSince < 60)    return 'Active';
+        if (daysSince < 365)   return 'Refreshed';
+        if (daysSince < 40000) return 'Revived';
+        return 'New';
+      } else {
+        if (daysSince < 60)    return 'Idle';
+        if (daysSince < 365)   return 'Dormant';
+        if (daysSince < 40000) return 'Closed';
+        return 'Prospective';
+      }
+    }
+
+    function confPips(c) {
+      return ['●','●','●'].map((p,i) =>
+        `<span style="color:${i < c ? 'var(--blue)' : 'var(--gray-border)'}">${p}</span>`
+      ).join('');
+    }
+
+    // ═══════════════════════════════════════════════
+    // AUTH
+    // ═══════════════════════════════════════════════
+    function getToken() { return sessionStorage.getItem(TOKEN_KEY); }
+
+    async function doLogin() {
+      const pwd = document.getElementById('password-input').value.trim();
+      const btn = document.getElementById('login-btn');
+      const err = document.getElementById('login-error');
+      if (!pwd) return;
+      btn.textContent = 'Signing in…'; btn.disabled = true; err.style.display = 'none';
+      try {
+        const res = await fetch('/api/auth', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({password:pwd}) });
+        const data = await res.json();
+        if (res.ok && data.token) { sessionStorage.setItem(TOKEN_KEY, data.token); showApp(); }
+        else { err.style.display = 'block'; }
+      } catch(e) { err.textContent = 'Connection error. Please try again.'; err.style.display = 'block'; }
+      btn.textContent = 'Sign in'; btn.disabled = false;
+    }
+
+    document.getElementById('password-input').addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });
+
+    function doLogout() {
+      sessionStorage.removeItem(TOKEN_KEY);
+      document.getElementById('app').style.display = 'none';
+      document.getElementById('login-screen').style.display = 'flex';
+      document.getElementById('password-input').value = '';
+    }
+
+    // ═══════════════════════════════════════════════
+    // APP INIT
+    // ═══════════════════════════════════════════════
+    function showApp() {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('app').style.display = 'flex';
+      document.getElementById('header-date').textContent = 'Loading data…';
+      loadData();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => { if (getToken()) showApp(); });
+
+    function showPage(name) {
+      currentPage = name;
+      ['dashboard','accounts','status','insights','alerts','definitions'].forEach(p => {
+        document.getElementById('page-' + p).classList.toggle('active', p === name);
+        const nav = document.getElementById('nav-' + p);
+        if (nav) nav.classList.toggle('active', p === name);
+      });
+      // Show/hide header filters (only relevant on dashboard)
+      document.getElementById('header-filters').style.display = name === 'dashboard' ? '' : 'none';
+      if (name === 'accounts')    renderAccountsPage();
+      if (name === 'status')      renderStatusPage();
+      if (name === 'insights')    renderInsightsPage();
+      if (name === 'alerts')      renderAlertsPage();
+      if (name === 'definitions') renderDefinitionsPage();
+    }
+
+    let isPrinting = false;
+
+    function doPrint() {
+      isPrinting = true;
+      renderSummaryTable();
+      renderSalesTable();
+      renderAPTable();
+      window.print();
+      isPrinting = false;
+      renderSummaryTable();
+      renderSalesTable();
+      renderAPTable();
+    }
+
+    // ═══════════════════════════════════════════════
+    // DATA LOADING
+    // ═══════════════════════════════════════════════
+    async function loadData() {
+      try {
+        const res = await fetch('/api/data', { headers:{'Authorization':'Bearer ' + getToken()} });
+        if (res.status === 401) { doLogout(); return; }
+        const data = await res.json();
+
+        rawSales   = (data.sales    || []).map(r => ({ ...r, date: new Date(r.date) }));
+
+        rawListing = (data.listing || []).map(r => ({
+          ...r,
+          contractStart: r.contractStart ? new Date(r.contractStart) : null,
+          contractEnd:   r.contractEnd   ? new Date(r.contractEnd)   : null,
+        }));
+
+        // Generate monthly listing-fee A&P entries (fee ÷ 12 per active month)
+        const listingAPRows = [];
+        const allSalesAccounts = new Set(rawSales.map(r => r.account.toLowerCase()));
+        rawListing.forEach(l => {
+          if (!l.fee || !l.contractStart) return;
+          const monthly = l.fee / 12;
+          const start = new Date(l.contractStart.getFullYear(), l.contractStart.getMonth(), 1);
+          const endRaw = l.contractEnd || maxDate;
+          const end   = new Date(endRaw.getFullYear(), endRaw.getMonth(), 1);
+          for (let m = new Date(start); m <= end; m.setMonth(m.getMonth() + 1)) {
+            listingAPRows.push({
+              date:        new Date(m),
+              account:     l.account,
+              sgd:         monthly,
+              type:        'Listing Fee',
+              description: 'Listing fee (monthly split)',
+            });
+          }
+        });
+
+        // Exclude raw listing-fee entries from A&P sheet (full-year lump charges, orphans etc.)
+        const listingKeywords = /listing/i;
+        const apRows = (data.ap || [])
+          .map(r => ({ ...r, date: new Date(r.date) }))
+          .filter(r => !listingKeywords.test(r.type) && !listingKeywords.test(r.description));
+
+        // Merge: clean A&P + monthly listing splits + discount A&P
+        const discountRows = (data.discount || [])
+          .filter(r => r.sgd < 0)
+          .map(r => ({ date: new Date(r.date), account: r.account, sgd: Math.abs(r.sgd), type: 'Discount', description: 'Private discount' }));
+        rawAP = [...apRows, ...listingAPRows, ...discountRows];
+        annualTarget = data.annual_target || 0;
+
+        // Doorlist — canonical account names and operational status
+        const doorlist = (data.doorlist || []);
+        closedAccounts = new Set(
+          doorlist
+            .filter(r => r.status.toLowerCase().trim() === 'closed')
+            .map(r => r.account.toLowerCase().trim())
+        );
+
+        // Use consolidated listing sheet if available, otherwise fall back to legacy
+        const conListing = data.consolidatedListing || [];
+        if (conListing.length) {
+          rawListing = conListing.map(r => ({
+            ...r,
+            contractStart: r.contractStart ? new Date(r.contractStart) : null,
+            contractEnd:   r.contractEnd   ? new Date(r.contractEnd)   : null,
+          }));
+        }
+
+        // Derive maxDate from latest sales date
+        const validDates = rawSales.map(r => r.date).filter(d => !isNaN(d.getTime()));
+        if (validDates.length > 0) {
+          maxDate = new Date(Math.max(...validDates.map(d => d.getTime())));
+          maxDate.setHours(0,0,0,0);
+        }
+        mtdViewDate = new Date(maxDate.getFullYear(), maxDate.getMonth(), 1);
+
+        document.getElementById('header-date').textContent =
+          'Data as of ' + maxDate.toLocaleDateString('en-SG', { day:'numeric', month:'short', year:'numeric' });
+
+        buildAccountMeta();
+        buildInsightsCache();
+        populateAccountSelector();
+        populateGroupSelector();
+        render();
+      } catch(e) {
+        console.error('Failed to load data:', e);
+        document.getElementById('header-date').textContent = 'Error loading data';
+      }
+    }
+
+    // ═══════════════════════════════════════════════
+    // ACCOUNT METADATA (for Accounts page)
+    // ═══════════════════════════════════════════════
+    function buildAccountMeta() {
+      const invalid   = new Set(['', '#n/a', 'n/a', '#na']);
+      const ytdStart  = periodStart(maxDate);
+      const mtdStart_ = new Date(maxDate.getFullYear(), maxDate.getMonth(), 1);
+      acctsMeta = {};
+      rawSales.forEach(r => {
+        if (!r.account || invalid.has(r.account.toLowerCase())) return;
+        if (!acctsMeta[r.account]) acctsMeta[r.account] = {
+          premise: r.premise || '', firstOrder: r.date, lastOrder: r.date,
+          ytdRev:0, mtdRev:0, txCount:0, months: new Set()
+        };
+        const m = acctsMeta[r.account];
+        if (r.date < m.firstOrder) m.firstOrder = r.date;
+        if (r.date > m.lastOrder)  m.lastOrder  = r.date;
+        if (r.date >= ytdStart)  m.ytdRev  += parseFloat(r.revenue) || 0;
+        if (r.date >= mtdStart_) m.mtdRev  += parseFloat(r.revenue) || 0;
+        m.txCount++;
+        const mk = `${r.date.getFullYear()}-${String(r.date.getMonth()+1).padStart(2,'0')}`;
+        m.months.add(mk);
+      });
+
+      // Derive tenure, active months, streak from month sets
+      Object.values(acctsMeta).forEach(m => {
+        m.activeMo  = m.months.size;
+        m.tenureMo  = (maxDate.getFullYear() - m.firstOrder.getFullYear()) * 12
+                    + (maxDate.getMonth()    - m.firstOrder.getMonth()) + 1;
+        m.streak    = calcStreak(m.months);
+        m.maxStreak = calcMaxStreak(m.months);
+        // Delete the Set so acctsMeta stays serialisable if ever needed
+        delete m.months;
+      });
+    }
+
+    // ═══════════════════════════════════════════════
+    // INSIGHTS CACHE (computed once at load, shared by Insights + Status pages)
+    // ═══════════════════════════════════════════════
+    function buildInsightsCache() {
+      const invalid  = new Set(['', '#n/a', 'n/a', '#na', '0']);
+      const allSales = rawSales.filter(r => r.account && !invalid.has(r.account.toLowerCase()) && r.date);
+      const onSales  = allSales.filter(r => r.premise === 'on');
+      const offSales = allSales.filter(r => r.premise !== 'on');
+
+      const now      = maxDate;
+      const m3Start  = new Date(now.getFullYear(), now.getMonth() - 2, 1);
+      const p3Start  = new Date(now.getFullYear(), now.getMonth() - 5, 1);
+      const p3End    = new Date(now.getFullYear(), now.getMonth() - 2, 0);
+      const mtdStart = new Date(now.getFullYear(), now.getMonth(), 1);
+
+      // Per-account map from on-premise sales
+      const acctMap = {};
+      onSales.forEach(r => {
+        const d  = new Date(r.date);
+        const mk = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+        if (!acctMap[r.account]) acctMap[r.account] = { months: new Set(), orders: [], firstDate: d, lastDate: d };
+        const a = acctMap[r.account];
+        a.months.add(mk);
+        a.orders.push({ d, rev: parseFloat(r.revenue) || 0, mk });
+        if (d < a.firstDate) a.firstDate = d;
+        if (d > a.lastDate)  a.lastDate  = d;
+      });
+
+      function moGap(a, b) { return (b.getFullYear() - a.getFullYear()) * 12 + (b.getMonth() - a.getMonth()); }
+
+      const acctSoldThisMonth = new Set(onSales.filter(r => new Date(r.date) >= mtdStart).map(r => r.account));
+
+      // First pass — raw per-account stats
+      const onStats = Object.entries(acctMap).map(([name, a]) => {
+        const activeMo  = a.months.size;
+        const tenureMo  = moGap(a.firstDate, now) + 1;
+        const mkRev     = {};
+        a.orders.forEach(o => { mkRev[o.mk] = (mkRev[o.mk] || 0) + o.rev; });
+        const avgBasket = activeMo ? Object.values(mkRev).reduce((s,v)=>s+v,0) / activeMo : 0;
+        const rev3  = a.orders.filter(o => o.d >= m3Start && o.d <= now).reduce((s,o)=>s+o.rev, 0);
+        const revP3 = a.orders.filter(o => o.d >= p3Start && o.d <= p3End).reduce((s,o)=>s+o.rev, 0);
+        return {
+          name,
+          daysSince: Math.floor((now - a.lastDate) / 86400000),
+          lastDate:  a.lastDate,
+          tenureMo, activeMo,
+          cadence:   tenureMo > 0 ? activeMo / tenureMo : 0,
+          streak:    calcStreak(a.months),
+          maxStreak: calcMaxStreak(a.months),
+          avgBasket, rev3, revP3,
+          momPct:    revP3 > 0 ? (rev3 - revP3) / revP3 : (rev3 > 0 ? 1 : 0),
+        };
+      });
+
+      // Second pass — health scores (need portfolio mu0 first)
+      const kSc = 3;
+      const mu0 = (() => {
+        const bs = onStats.filter(s => s.activeMo > 0).map(s => s.avgBasket);
+        return bs.length ? bs.reduce((a,b)=>a+b,0) / bs.length : 1;
+      })();
+      onStats.forEach(s => {
+        const sRec = s.activeMo < 2 ? 0
+          : s.daysSince < 30 ? 20 : s.daysSince < 60 ? 16 : s.daysSince < 90 ? 12
+          : s.daysSince < 120 ? 6 : s.daysSince < 180 ? 2 : 0;
+        const sCad = Math.round((s.activeMo / (s.tenureMo + 3)) * 20);
+        const sStr = Math.round(Math.min(s.streak, 12) / 12 * 20);
+        const sMom = s.activeMo >= 2 ? Math.round(Math.min(Math.max((s.momPct + 1) / 2, 0), 1) * 20) : 0;
+        s.smoothed = (kSc * mu0 + s.avgBasket * s.activeMo) / (kSc + s.activeMo);
+        const sVal = Math.round(Math.min(s.smoothed / mu0, 2) / 2 * 20);
+        s.conf  = s.activeMo >= 6 ? 3 : s.activeMo >= 3 ? 2 : 1;
+        s.score = sRec + sCad + sStr + sMom + sVal;
+      });
+
+      // Off-premise account map — only explicitly labelled 'online' or 'private' accounts
+      const offAcctMap = {};
+      offSales.filter(r => r.premise === 'online' || r.premise === 'private').forEach(r => {
+        if (!offAcctMap[r.account]) offAcctMap[r.account] = { premise: r.premise, sold: false };
+        if (new Date(r.date) >= mtdStart) offAcctMap[r.account].sold = true;
+      });
+
+      insightsCache = { onStats, offAcctMap, acctSoldThisMonth };
+    }
+
+    // ═══════════════════════════════════════════════
+    // SEARCHABLE ACCOUNT DROPDOWN
+    // ═══════════════════════════════════════════════
+    function populateAccountSelector() {
+      const dd = document.getElementById('acct-dropdown');
+      const invalid = new Set(['', '#n/a', 'n/a', '#na']);
+      // Use only rawSales accounts — A&P/discount sheets use variant customer names
+      const accounts = [...new Set(rawSales.map(r => r.account))]
+        .filter(a => a && !invalid.has(a.toLowerCase())).sort();
+
+      dd.innerHTML = '<div class="acct-option selected" data-value="__all__" onclick="selectAccount(\'__all__\', \'\')">All accounts</div>';
+      accounts.forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'acct-option';
+        div.dataset.value = a;
+        div.textContent = a;
+        div.onclick = () => selectAccount(a, a);
+        dd.appendChild(div);
+      });
+    }
+
+    function openAcctDropdown() { document.getElementById('acct-dropdown').classList.add('open'); filterAccounts(); }
+    function closeAcctDropdown() { document.getElementById('acct-dropdown').classList.remove('open'); }
+
+    function selectAccount(value, label) {
+      currentAccount = value;
+      // Always reset group filter so the account isn't silently hidden by a group it doesn't belong to
+      if (value !== '__all__' && currentGroup !== '__all__') selectGroup('__all__');
+      const input    = document.getElementById('acct-search');
+      const clearBtn = document.getElementById('acct-clear');
+      input.value    = label;
+      input.placeholder = label || 'All accounts';
+      clearBtn.style.display = value === '__all__' ? 'none' : 'block';
+      document.querySelectorAll('.acct-option').forEach(el => el.classList.toggle('selected', el.dataset.value === value));
+      closeAcctDropdown();
+      input.blur();
+      showPage('dashboard'); // always land on Dashboard when an account is selected
+      render();
+    }
+
+    function filterAccounts() {
+      const q = (document.getElementById('acct-search').value || '').toLowerCase();
+      let anyVisible = false;
+      document.querySelectorAll('.acct-option').forEach(el => {
+        const match = el.textContent.toLowerCase().includes(q);
+        el.classList.toggle('hidden', !match);
+        if (match) anyVisible = true;
+      });
+      let noRes = document.getElementById('acct-no-results');
+      if (!anyVisible) {
+        if (!noRes) { noRes = document.createElement('div'); noRes.id='acct-no-results'; noRes.className='acct-no-results'; noRes.textContent='No matching accounts'; document.getElementById('acct-dropdown').appendChild(noRes); }
+        noRes.style.display = 'block';
+      } else if (noRes) { noRes.style.display = 'none'; }
+    }
+
+    function clearAcctSearch() { selectAccount('__all__', ''); document.getElementById('acct-search').value = ''; filterAccounts(); }
+
+    document.addEventListener('click', e => {
+      const wrap = document.getElementById('acct-wrap');
+      if (wrap && !wrap.contains(e.target)) closeAcctDropdown();
+    });
+
+    // ═══════════════════════════════════════════════
+    // GROUP CHIPS
+    // ═══════════════════════════════════════════════
+    function populateGroupSelector() {
+      const invalid = new Set(['', '0', '#n/a', 'n/a', '#na']);
+      const sourceRows = onPremiseOnly ? rawSales.filter(r => r.premise === 'on') : rawSales;
+      const groups = [...new Set(sourceRows.map(r => r.group).filter(g => g && !invalid.has(g.toLowerCase())))].sort();
+      const container = document.getElementById('group-chips');
+      container.innerHTML = '<div class="group-chip active" data-value="__all__" onclick="selectGroup(\'__all__\')">All</div>';
+      groups.forEach(g => {
+        const chip = document.createElement('div');
+        chip.className = 'group-chip'; chip.dataset.value = g; chip.textContent = g;
+        chip.onclick = () => selectGroup(g);
+        container.appendChild(chip);
+      });
+      // Restore active state
+      document.querySelectorAll('.group-chip').forEach(el => el.classList.toggle('active', el.dataset.value === currentGroup));
+    }
+
+    function selectGroup(value) {
+      currentGroup = value;
+      document.querySelectorAll('.group-chip').forEach(el => el.classList.toggle('active', el.dataset.value === value));
+      render();
+    }
+
+    // ═══════════════════════════════════════════════
+    // FILTERED DATA
+    // ═══════════════════════════════════════════════
+    function toggleOnPremise() {
+      onPremiseOnly = !onPremiseOnly;
+      const chip = document.getElementById('on-prem-chip');
+      if (chip) chip.classList.toggle('active', onPremiseOnly);
+      populateGroupSelector();
+      render();
+    }
+
+    function filteredSales() {
+      let rows = rawSales;
+      if (onPremiseOnly) rows = rows.filter(r => r.premise === 'on');
+      if (currentAccount !== '__all__') rows = rows.filter(r => r.account === currentAccount);
+      if (currentGroup !== '__all__') {
+        // Derive the set of accounts tagged to this group (some rows may have blank Group),
+        // then include ALL rows for those accounts — same logic as filteredAP().
+        const groupAccts = new Set(
+          rawSales.filter(r => r.group === currentGroup).map(r => r.account)
+        );
+        rows = rows.filter(r => groupAccts.has(r.account));
+      }
+      return rows;
+    }
+
+    function filteredAP() {
+      let rows = rawAP;
+      if (currentAccount !== '__all__') rows = rows.filter(r => r.account === currentAccount);
+      if (currentGroup !== '__all__') {
+        const groupAccts = new Set(rawSales.filter(r => r.group === currentGroup).map(r => r.account));
+        rows = rows.filter(r => groupAccts.has(r.account));
+      }
+      return rows;
+    }
+
+    // ═══════════════════════════════════════════════
+    // DATE HELPERS
+    // ═══════════════════════════════════════════════
+    function startOfMonth(d)     { return new Date(d.getFullYear(), d.getMonth(), 1); }
+    function startOfYear(d)      { return new Date(d.getFullYear(), 0, 1); }
+    function startOfPriorMonth(d){ return new Date(d.getFullYear(), d.getMonth() - 1, 1); }
+    function startOfPriorYear(d) { return new Date(d.getFullYear() - 1, 0, 1); }
+    function endOfMonth(d)       { return new Date(d.getFullYear(), d.getMonth() + 1, 0); }
+    function sameMonthPrior(d)   { return new Date(d.getFullYear(), d.getMonth() - 1, d.getDate()); }
+    function sameMonthLastYear(d){ return new Date(d.getFullYear() - 1, d.getMonth(), d.getDate()); }
+    function sameYearLastYear(d) { return new Date(d.getFullYear() - 1, d.getMonth(), d.getDate()); }
+
+    // FY starts 1 July; if current month < July we're in the prior calendar year's FY
+    function periodStart(d) {
+      if (yearMode === 'cy') return new Date(d.getFullYear(), 0, 1);
+      return d.getMonth() >= 6
+        ? new Date(d.getFullYear(), 6, 1)
+        : new Date(d.getFullYear() - 1, 6, 1);
+    }
+    function priorPeriodStart(d) {
+      const s = periodStart(d);
+      return new Date(s.getFullYear() - 1, s.getMonth(), 1);
+    }
+    // Same elapsed days into the prior period (for YOY delta)
+    // e.g. FY Jul–Jun: if today is 26 May 2026 (330d into FY Jul 25),
+    // prior period end = July 1 2024 + 330d = 26 May 2025 (not May 2024)
+    function sameDayPriorPeriod(d) {
+      const dayOffset = Math.round((d - periodStart(d)) / 86400000);
+      const ps = priorPeriodStart(d);
+      return new Date(ps.getTime() + dayOffset * 86400000);
+    }
+    function periodLabel(d) {
+      const s = periodStart(d);
+      const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      if (yearMode === 'cy') return '1 Jan–' + d.getDate() + ' ' + mo[d.getMonth()] + ' ' + String(d.getFullYear()).slice(-2);
+      return '1 Jul ' + String(s.getFullYear()).slice(-2) + '–' + d.getDate() + ' ' + mo[d.getMonth()] + ' ' + String(d.getFullYear()).slice(-2);
+    }
+
+    function setYearMode(mode) {
+      yearMode = mode;
+      document.getElementById('btn-fy').classList.toggle('active', mode === 'fy');
+      document.getElementById('btn-cy').classList.toggle('active', mode === 'cy');
+      renderYTD();
+      renderSummaryTable();
+    }
+
+    function sumRevenue(rows, from, to) {
+      return rows.filter(r => r.date >= from && r.date <= to).reduce((s,r) => s + (parseFloat(r.revenue)||0), 0);
+    }
+
+    function fmtSGD(n) { return '$' + Math.round(n).toLocaleString('en-SG'); }
+    function fmtPct(n) { return (n >= 0 ? '+' : '') + n.toFixed(1) + '%'; }
+    function fmtDate(d) {
+      const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      return d.getDate() + ' ' + mo[d.getMonth()] + ' ' + String(d.getFullYear()).slice(-2);
+    }
+    function fmtMonth(d) {
+      return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][d.getMonth()] + ' ' + String(d.getFullYear()).slice(-2);
+    }
+    function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function closedTag(name) { return closedAccounts.has((name||'').toLowerCase().trim()) ? '<span class="acct-closed-tag">Closed</span>' : ''; }
+
+    // ═══════════════════════════════════════════════
+    // MTD MONTH NAVIGATION
+    // ═══════════════════════════════════════════════
+    function navigateMTD(delta) {
+      const candidate = new Date(mtdViewDate.getFullYear(), mtdViewDate.getMonth() + delta, 1);
+      const maxMonth  = new Date(maxDate.getFullYear(), maxDate.getMonth(), 1);
+      if (candidate > maxMonth) return;
+      mtdViewDate = candidate;
+      renderMTD();
+    }
+
+    // ═══════════════════════════════════════════════
+    // RENDER (top-level)
+    // ═══════════════════════════════════════════════
+    function render() {
+      renderMTD();
+      renderYTD();
+      renderSummaryTable();
+      renderSalesTable();
+      renderAPTable();
+      renderListingsCard();
+    }
+
+    // ── MTD SCORECARD ──────────────────────────────
+    function renderMTD() {
+      const sales = filteredSales();
+
+      // Determine the period being shown
+      const isCurrentMonth = mtdViewDate.getFullYear() === maxDate.getFullYear() &&
+                             mtdViewDate.getMonth()    === maxDate.getMonth();
+      const mtdStart = startOfMonth(mtdViewDate);
+      const mtdEnd   = isCurrentMonth ? maxDate : endOfMonth(mtdViewDate);
+      const mtdRev   = sumRevenue(sales, mtdStart, mtdEnd);
+
+      let compStart, compEnd, compLabel, sparkCompFrom, sparkCompTo;
+
+      if (mtdMode === 'mom') {
+        // Prior month: same date range for delta, full month for sparkline
+        if (isCurrentMonth) {
+          compStart = startOfPriorMonth(maxDate);
+          compEnd   = sameMonthPrior(maxDate);
+        } else {
+          compStart = new Date(mtdViewDate.getFullYear(), mtdViewDate.getMonth() - 1, 1);
+          compEnd   = endOfMonth(new Date(mtdViewDate.getFullYear(), mtdViewDate.getMonth() - 1, 1));
+        }
+        const pmD = new Date(mtdViewDate.getFullYear(), mtdViewDate.getMonth() - 1, 1);
+        compLabel     = 'vs ' + fmtMonth(pmD);
+        sparkCompFrom = new Date(mtdViewDate.getFullYear(), mtdViewDate.getMonth() - 1, 1);
+        sparkCompTo   = endOfMonth(sparkCompFrom);
+      } else {
+        const lyStart = new Date(mtdViewDate.getFullYear() - 1, mtdViewDate.getMonth(), 1);
+        if (isCurrentMonth) {
+          compStart = lyStart;
+          compEnd   = sameMonthLastYear(maxDate);
+        } else {
+          compStart = lyStart;
+          compEnd   = endOfMonth(lyStart);
+        }
+        compLabel     = 'vs ' + fmtMonth(new Date(mtdViewDate.getFullYear() - 1, mtdViewDate.getMonth(), 1));
+        sparkCompFrom = lyStart;
+        sparkCompTo   = endOfMonth(lyStart);
+      }
+
+      const compRev = sumRevenue(sales, compStart, compEnd);
+      const diff    = mtdRev - compRev;
+      const pct     = compRev > 0 ? (diff / compRev) * 100 : 0;
+
+      document.getElementById('mtd-value').textContent = fmtSGD(mtdRev);
+      document.getElementById('mtd-period').textContent =
+        '1–' + mtdEnd.getDate() + ' ' +
+        mtdViewDate.toLocaleDateString('en-SG', { month:'short', year:'numeric' });
+
+      const deltaEl = document.getElementById('mtd-delta');
+      deltaEl.textContent = (pct >= 0 ? '▲ ' : '▼ ') + fmtPct(pct);
+      deltaEl.className = 'score-delta ' + (pct >= 0 ? 'up' : 'down');
+      document.getElementById('mtd-abs').textContent = (diff >= 0 ? '+' : '') + fmtSGD(diff) + ' ' + compLabel;
+
+      // Nav button states
+      document.getElementById('mtd-next').disabled = isCurrentMonth;
+
+      drawSparkline('mtd-spark', sales, mtdStart, mtdEnd, endOfMonth(mtdViewDate), sales, sparkCompFrom, sparkCompTo);
+    }
+
+    // ── YTD SCORECARD ──────────────────────────────
+    const DEFAULT_ANNUAL_TARGET = 120000; // $120k fallback when env var not set
+    function renderYTD() {
+      const sales      = filteredSales();
+      const pStart     = periodStart(maxDate);
+      const ytdRev     = sumRevenue(sales, pStart, maxDate);
+      const priorRev   = sumRevenue(sales, priorPeriodStart(maxDate), sameDayPriorPeriod(maxDate));
+      const diff       = ytdRev - priorRev;
+      const pct        = priorRev > 0 ? (diff / priorRev) * 100 : 0;
+      const target     = annualTarget > 0 ? annualTarget : DEFAULT_ANNUAL_TARGET;
+      const targetPct  = Math.min((ytdRev / target) * 100, 100);
+
+      document.getElementById('ytd-value').textContent  = fmtSGD(ytdRev);
+      document.getElementById('ytd-period').textContent = periodLabel(maxDate);
+
+      const deltaEl = document.getElementById('ytd-delta');
+      deltaEl.textContent = (pct >= 0 ? '▲ ' : '▼ ') + fmtPct(pct);
+      deltaEl.className = 'score-delta ' + (pct >= 0 ? 'up' : 'down');
+
+      const mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const priorLabel = yearMode === 'fy'
+        ? "Jul '" + String(priorPeriodStart(maxDate).getFullYear()).slice(-2) + '–' + mo[maxDate.getMonth()] + " '" + String(maxDate.getFullYear()-1).slice(-2)
+        : "Jan–" + mo[maxDate.getMonth()] + " '" + String(maxDate.getFullYear()-1).slice(-2);
+      document.getElementById('ytd-abs').textContent = (diff >= 0 ? '+' : '') + fmtSGD(diff) + ' vs ' + priorLabel;
+
+      document.getElementById('ytd-target-pct').textContent = Math.round(targetPct) + '% of ' + fmtSGD(target);
+      document.getElementById('ytd-progress').style.width = targetPct + '%';
+    }
+
+    // ── ACCOUNT SUMMARY TABLE ──────────────────────
+    function sortSummary(col) {
+      summarySort = summarySort.col === col
+        ? { col, dir: summarySort.dir * -1 }
+        : { col, dir: col === 'acct' ? 1 : -1 };
+      renderSummaryTable();
+    }
+
+    function renderSummaryTable() {
+      const sales    = filteredSales();
+      const ap       = filteredAP();
+      const ytdStart = periodStart(maxDate);
+      const map      = {};
+
+      sales.filter(r => r.date >= ytdStart && r.date <= maxDate).forEach(r => {
+        if (!map[r.account]) map[r.account] = { rev:0, cogs:0, ap:0 };
+        map[r.account].rev  += parseFloat(r.revenue) || 0;
+        map[r.account].cogs += parseFloat(r.cogs)    || 0;
+      });
+      ap.filter(r => r.date >= ytdStart && r.date <= maxDate).forEach(r => {
+        if (!map[r.account]) map[r.account] = { rev:0, cogs:0, ap:0 };
+        map[r.account].ap += parseFloat(r.sgd) || 0;
+      });
+
+      const invalid = new Set(['', '#n/a', 'n/a', '#na']);
+      let rows = Object.entries(map)
+        .filter(([a,v]) => a && !invalid.has(a.toLowerCase()) && (v.rev||v.cogs||v.ap))
+        .map(([acct,v]) => ({ acct, ...v, profit: v.rev - v.cogs - v.ap }));
+
+      const { col, dir } = summarySort;
+      rows.sort((a, b) => {
+        const primary = col === 'acct'
+          ? dir * a.acct.localeCompare(b.acct)
+          : dir * (a[col] - b[col]);
+        if (primary !== 0) return primary;
+        // Tiebreaker: profit descending (highest profit first among equal values)
+        return b.profit - a.profit;
+      });
+
+      const hdrs = [
+        {key:'acct', label:'Account', cls:''},
+        {key:'rev',  label:'Revenue', cls:'num'},
+        {key:'cogs', label:'COGS',    cls:'num'},
+        {key:'ap',   label:'A&amp;P', cls:'num'},
+        {key:'profit',label:'Profit', cls:'num'},
+      ];
+      document.querySelector('#summary-table thead tr').innerHTML = hdrs.map(h => {
+        const active = summarySort.col === h.key;
+        const ind = active ? (summarySort.dir===1?' ▲':' ▼') : ' <span style="opacity:.25">⇅</span>';
+        return `<th class="${h.cls} sort-th${active?' sort-active':''}" onclick="sortSummary('${h.key}')">${h.label}${ind}</th>`;
+      }).join('');
+
+      if (isPrinting) rows = rows.slice(0, 15);
+
+      const tbody = document.getElementById('summary-body');
+      if (!rows.length) { tbody.innerHTML='<tr><td colspan="5" class="empty-state">No data for selected filters</td></tr>'; return; }
+
+      // Context label
+      const ctx = [];
+      if (currentGroup   !== '__all__') ctx.push(currentGroup);
+      if (currentAccount !== '__all__') ctx.push(currentAccount);
+      document.getElementById('summary-context').textContent = ctx.length ? '— ' + ctx.join(', ') : '';
+
+      tbody.innerHTML = rows.map(r => {
+        const safeAcct = r.acct.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        return `<tr>
+          <td style="max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;color:var(--blue);padding-right:4px"
+              onclick="selectAccount('${safeAcct}','${safeAcct}')">${esc(r.acct)}${closedTag(r.acct)}</td>
+          <td class="num" style="white-space:nowrap">${fmtSGD(r.rev)}</td>
+          <td class="num" style="white-space:nowrap">${fmtSGD(r.cogs)}</td>
+          <td class="num" style="white-space:nowrap">${fmtSGD(r.ap)}</td>
+          <td class="num ${r.profit>=0?'profit-pos':'profit-neg'}" style="white-space:nowrap">${fmtSGD(r.profit)}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    // ── RECENT SALES TABLE ─────────────────────────
+    function renderSalesTable() {
+      const rows = filteredSales()
+        .filter(r => r.date <= maxDate)
+        .sort((a,b) => b.date - a.date)
+        .slice(0, isPrinting ? 15 : 100);
+
+      const tbody = document.getElementById('sales-body');
+      if (!rows.length) { tbody.innerHTML='<tr><td colspan="5" class="empty-state">No recent sales</td></tr>'; return; }
+
+      let bandMonth = null, bandAlt = false;
+      tbody.innerHTML = rows.map(r => {
+        const m = r.date.getFullYear()*12 + r.date.getMonth();
+        if (m !== bandMonth) { bandMonth = m; bandAlt = !bandAlt; }
+        return `<tr class="${bandAlt?'band-alt':''}">
+          <td style="white-space:nowrap">${fmtDate(r.date)}</td>
+          <td style="max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(r.account)}</td>
+          <td style="max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(r.sku)}</td>
+          <td class="num">${Math.round(r.pcs||0)}</td>
+          <td class="num">${fmtSGD(r.revenue)}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    // ── A&P TABLE ──────────────────────────────────
+    function renderAPTable() {
+      const rows = filteredAP()
+        .filter(r => r.date <= maxDate)
+        .sort((a,b) => b.date - a.date)
+        .slice(0, isPrinting ? 15 : 100);
+
+      const tbody = document.getElementById('ap-body');
+      if (!rows.length) { tbody.innerHTML='<tr><td colspan="5" class="empty-state">No A&P records</td></tr>'; return; }
+
+      let bandMonth = null, bandAlt = false;
+      tbody.innerHTML = rows.map(r => {
+        const m = r.date.getFullYear()*12 + r.date.getMonth();
+        if (m !== bandMonth) { bandMonth = m; bandAlt = !bandAlt; }
+        const desc = esc(r.description);
+        const truncDesc = r.description && r.description.length > 28
+          ? esc(r.description.slice(0,28)) + '…'
+          : desc;
+        return `<tr class="${bandAlt?'band-alt':''}">
+          <td style="white-space:nowrap">${fmtDate(r.date)}</td>
+          <td style="max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(r.account)}</td>
+          <td>${badgeAP(r.type)}</td>
+          <td class="desc-cell" onclick="showAPTooltip('${esc(r.account)}','${esc(r.type)}','${fmtDate(r.date)}','${desc.replace(/'/g,"\\'")}')"
+              title="${desc}" style="max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${truncDesc}</td>
+          <td class="num">${fmtSGD(r.sgd)}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    // ── A&P TOOLTIP ────────────────────────────────
+    function showAPTooltip(account, type, date, description) {
+      document.getElementById('ap-tooltip-meta').textContent = date + ' · ' + account + (type ? ' · ' + type : '');
+      document.getElementById('ap-tooltip-body').textContent = description || '(no description)';
+      document.getElementById('ap-tooltip-overlay').classList.remove('hidden');
+    }
+    function closeAPTooltip(e) {
+      if (!e || e.target === document.getElementById('ap-tooltip-overlay'))
+        document.getElementById('ap-tooltip-overlay').classList.add('hidden');
+    }
+
+    // ── SPARKLINE ──────────────────────────────────
+    // periodEnd: last day of the full current period (e.g. endOfMonth) — used as the x-axis
+    // denominator so the solid line shows proportionate progress mid-month.
+    function drawSparkline(canvasId, sales, from, to, periodEnd, compSales, compFrom, compTo) {
+      const canvas = document.getElementById(canvasId);
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = Math.floor(canvas.parentElement ? canvas.parentElement.clientWidth : 280);
+      const H = 36;
+      canvas.width  = W;
+      canvas.height = H;
+
+      function buildCum(rows, pFrom, pTo) {
+        const days = Math.max(Math.round((pTo - pFrom) / 86400000) + 1, 1);
+        const b = new Array(days).fill(0);
+        rows.filter(r => r.date >= pFrom && r.date <= pTo).forEach(r => {
+          const i = Math.round((r.date - pFrom) / 86400000);
+          if (i >= 0 && i < days) b[i] += parseFloat(r.revenue) || 0;
+        });
+        return b.reduce((acc,v) => { acc.push((acc[acc.length-1]||0)+v); return acc; }, []);
+      }
+
+      const curCum  = buildCum(sales, from, to);
+      const compCum = (compSales && compFrom && compTo) ? buildCum(compSales, compFrom, compTo) : null;
+      const peak    = Math.max(...curCum, ...(compCum||[]), 1);
+
+      // Full period length (e.g. all days in the month) — solid line is positioned proportionately
+      const fullDays = Math.max(Math.round((periodEnd - from) / 86400000) + 1, curCum.length);
+
+      const padX = 6, padY = 4;
+
+      // Solid line: x position is relative to the full period (proportionate progress)
+      function curPoints(cum) {
+        return cum.map((v,i) => ({
+          x: padX + (i / (fullDays - 1)) * (W - 2*padX),
+          y: H - padY - (v / peak) * (H - 2*padY)
+        }));
+      }
+      // Comparison line: always spans full width end-to-end
+      function compPoints(cum) {
+        const n = Math.max(cum.length - 1, 1);
+        return cum.map((v,i) => ({
+          x: padX + (i / n) * (W - 2*padX),
+          y: H - padY - (v / peak) * (H - 2*padY)
+        }));
+      }
+
+      ctx.clearRect(0, 0, W, H);
+
+      // Comparison line (faded dashed, always full width)
+      if (compCum) {
+        const cp = compPoints(compCum);
+        ctx.beginPath(); ctx.moveTo(cp[0].x, cp[0].y);
+        cp.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.strokeStyle = 'rgba(55,138,221,.28)';
+        ctx.lineWidth = 1.4; ctx.setLineDash([3,3]); ctx.lineJoin='round'; ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // Current line (solid, proportionate to position in month)
+      const pts = curPoints(curCum);
+      ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+      pts.slice(1).forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.strokeStyle='#378ADD'; ctx.lineWidth=1.8; ctx.lineJoin='round'; ctx.stroke();
+
+      // Endpoint dot
+      const last = pts[pts.length-1];
+      ctx.beginPath(); ctx.arc(last.x, last.y, 3, 0, Math.PI*2);
+      ctx.fillStyle='#378ADD'; ctx.fill();
+    }
+
+    // ── UI HELPERS ─────────────────────────────────
+    function badgeAP(type) {
+      const t = String(type||'').toLowerCase();
+      if (t.includes('event')) return '<span class="badge badge-event">Event</span>';
+      if (t.includes('promo')) return '<span class="badge badge-promo">Promo</span>';
+      return '<span class="badge badge-trade">Trade</span>';
+    }
+
+    function setMTDMode(mode) {
+      mtdMode = mode;
+      document.getElementById('btn-mom').className     = 'toggle-btn' + (mode==='mom' ? ' active' : '');
+      document.getElementById('btn-yoy-mtd').className = 'toggle-btn' + (mode==='yoy' ? ' active' : '');
+      renderMTD();
+    }
+
+    function switchTab(tab) {
+      document.getElementById('panel-sales').classList.toggle('hidden', tab !== 'sales');
+      document.getElementById('panel-ap').classList.toggle('hidden',    tab !== 'ap');
+      document.getElementById('stab-sales').className = 'stab' + (tab==='sales' ? ' active' : '');
+      document.getElementById('stab-ap').className    = 'stab' + (tab==='ap'    ? ' active' : '');
+    }
+
+    // ═══════════════════════════════════════════════
+    // ACCOUNTS PAGE
+    // ═══════════════════════════════════════════════
+    function switchAcctsTab(tab) {
+      acctsTab = tab;
+      ['off','on','new','listings'].forEach(t => {
+        document.getElementById('stab-' + t).className = 'stab' + (t===tab ? ' active' : '');
+        document.getElementById('accts-' + t + '-list').classList.toggle('hidden', t !== tab);
+      });
+      // Hide sort row on listings tab (not applicable)
+      document.getElementById('accts-sort-row').style.display = tab === 'listings' ? 'none' : '';
+      filterAccountsList();
+    }
+
+    let acctSort = 'name'; // 'name' | 'rev' | 'tenure'
+
+    function setAcctSort(s) {
+      acctSort = s;
+      document.querySelectorAll('.acct-sort-btn').forEach(b => b.classList.toggle('active', b.dataset.sort === s));
+      renderAccountsPage();
+    }
+
+    function renderAccountsPage() {
+      const invalid = new Set(['', '#n/a', 'n/a', '#na']);
+      const allAccts = Object.entries(acctsMeta)
+        .filter(([a]) => a && !invalid.has(a.toLowerCase()))
+        .map(([name, m]) => ({ name, ...m }));
+
+      // 0 = active/idle, 1 = dormant, 2 = closed/no orders
+      function statusGroup(a) {
+        if (!a.lastOrder) return 2;
+        const days = (maxDate - a.lastOrder) / 86400000;
+        if (days < 60)  return 0;
+        if (days < 365) return 1;
+        return 2;
+      }
+
+      function sortList(list) {
+        if (acctSort === 'rev')    return [...list].sort((a,b) => b.ytdRev - a.ytdRev);
+        if (acctSort === 'tenure') return [...list].sort((a,b) => {
+          const ga = statusGroup(a), gb = statusGroup(b);
+          if (ga !== gb) return ga - gb;
+          return (b.tenureMo||0) - (a.tenureMo||0) || (b.activeMo||0) - (a.activeMo||0);
+        });
+        return [...list].sort((a,b) => a.name.localeCompare(b.name));
+      }
+
+      const ninetyDaysAgo = new Date(maxDate.getTime() - 90*86400000);
+
+      // Off-premise: 'off', 'private', 'online', and unknowns
+      const offFull = sortList([
+        ...allAccts.filter(a => a.premise === 'off'),
+        ...allAccts.filter(a => !['on','off','private','online'].includes(a.premise))
+      ]);
+      const onSorted  = sortList(allAccts.filter(a => a.premise === 'on'));
+      const newList   = [...allAccts.filter(a => a.premise === 'on')].sort((a,b) => b.firstOrder - a.firstOrder);
+
+      function streakBadge(a) {
+        const cur = a.streak || 0;
+        const max = a.maxStreak || cur;
+        let html = '';
+        // Only show active streak if last order was within the last 2 months
+        // (prevents dormant/closed accounts from carrying stale fire badges)
+        const daysSinceOrder = a.lastOrder ? Math.round((maxDate - a.lastOrder) / 86400000) : 999;
+        const streakIsCurrent = daysSinceOrder <= 62;
+        if (cur >= 3 && streakIsCurrent) {
+          const bg  = cur >= 6 ? '#E1F5EE' : 'var(--blue-light)';
+          const col = cur >= 6 ? 'var(--teal-dark)' : 'var(--blue)';
+          html += `<span class="badge" style="background:${bg};color:${col}">🔥${cur}mo</span>`;
+        }
+        // Historical best — grey ghost badge when streak is broken or cur hasn't caught up
+        if (max >= 3 && max > cur) {
+          html += `<span class="badge" style="background:#ECECEC;color:#999;font-size:9px;opacity:.8">⬤${max}mo</span>`;
+        }
+        return html;
+      }
+
+      function tenureLine(a) {
+        const parts = [];
+        if (a.activeMo)  parts.push(a.activeMo + ' active mo');
+        if (a.tenureMo)  parts.push(a.tenureMo + ' mo tenure');
+        return parts.length ? `<div class="acct-list-sub">${parts.join(' · ')}</div>` : '';
+      }
+
+      function buildPremiseList(list, emptyMsg) {
+        if (!list.length) return `<div class="acct-empty">${emptyMsg || 'No accounts found'}</div>`;
+        const header = `<div class="acct-list-header"><span>Name</span><span>FYTD Revenue</span></div>`;
+        const items  = list.map(a => {
+          const safe    = a.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+          const closed  = statusGroup(a) === 2;
+          const dimStyle = closed ? ' style="opacity:.45;filter:grayscale(1)"' : '';
+          return `<div class="acct-list-item"${dimStyle} onclick="goToAccountDashboard('${safe}')">
+            <div class="acct-list-body">
+              <div class="acct-list-name">${esc(a.name)}${closedTag(a.name)} ${streakBadge(a)}</div>
+              ${tenureLine(a)}
+            </div>
+            <div class="acct-list-rev">${fmtSGD(a.ytdRev)}</div>
+            <div class="acct-list-arr">›</div>
+          </div>`;
+        }).join('');
+        return header + items;
+      }
+
+      function buildNewList(list) {
+        if (!list.length) return '<div class="acct-empty">No on-premise accounts found</div>';
+        return list.map(a => {
+          const safe  = a.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+          const isNew = a.firstOrder >= ninetyDaysAgo;
+          return `<div class="acct-list-item" onclick="goToAccountDashboard('${safe}')">
+            <div class="acct-list-body">
+              <div class="acct-list-name">${esc(a.name)}${closedTag(a.name)}${isNew ? ' <span class="badge badge-new">NEW</span>' : ''} ${streakBadge(a)}</div>
+              <div class="acct-list-sub">First order: ${fmtDate(a.firstOrder)} · ${a.activeMo||0} active mo</div>
+            </div>
+            <div class="acct-list-rev">${fmtSGD(a.ytdRev)}</div>
+            <div class="acct-list-arr">›</div>
+          </div>`;
+        }).join('');
+      }
+
+      document.getElementById('accts-off-list').innerHTML = buildPremiseList(offFull, 'No off-premise accounts');
+      document.getElementById('accts-on-list').innerHTML  = buildPremiseList(onSorted, 'No on-premise accounts');
+      document.getElementById('accts-new-list').innerHTML = buildNewList(newList);
+    }
+
+    function filterAccountsList() {
+      const q = (document.getElementById('accts-search').value || '').toLowerCase();
+      const listId = 'accts-' + acctsTab + '-list';
+      document.querySelectorAll('#' + listId + ' .acct-list-item').forEach(el => {
+        el.style.display = el.textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+
+    function goToAccountDashboard(accountName) {
+      showPage('dashboard');
+      selectAccount(accountName, accountName);
+    }
+
+    // ═══════════════════════════════════════════════
+    // STATUS PAGE
+    // ═══════════════════════════════════════════════
+    let statusPageBuckets = null;
+
+    const STATUS_DEFINITIONS = {
+      Active:      'Sold this month, last order < 60 days ago.',
+      Idle:        'Not sold this month, last order < 60 days ago.',
+      Refreshed:   'Sold this month after a gap — last order 60–365 days ago.',
+      Dormant:     'Not sold this month, last order 60–365 days ago.',
+      Revived:     'Sold this month after a long gap — last order > 365 days ago.',
+      Closed:      'Not sold this month, last order > 365 days ago.',
+      New:         'Has placed orders but no order history in prior months.',
+      Prospective: 'No order history at all.',
+      'off-sold':   'Off-premise accounts sold this month.',
+      'off-unsold': 'Off-premise accounts not sold this month.',
+    };
+
+    function renderStatusPage() {
+      if (!insightsCache) buildInsightsCache();
+      const { onStats, offAcctMap, acctSoldThisMonth } = insightsCache;
+
+      // On-premise buckets
+      const onBuckets = {};
+      ON_STATUS_ORDER.forEach(k => { onBuckets[k] = []; });
+      onStats.forEach(s => onBuckets[classifyAccount(s.daysSince, acctSoldThisMonth.has(s.name))].push(s.name));
+      ON_STATUS_ORDER.forEach(k => { onBuckets[k].sort(); });
+
+      // Off-premise: ALL non-on accounts → just Sold / Unsold
+      const offSoldList   = Object.entries(offAcctMap).filter(([,v])=>v.sold).map(([n])=>n).sort();
+      const offUnsoldList = Object.entries(offAcctMap).filter(([,v])=>!v.sold).map(([n])=>n).sort();
+
+      statusPageBuckets = {
+        ...Object.fromEntries(ON_STATUS_ORDER.map(k => [k, onBuckets[k]])),
+        'off-sold':   offSoldList,
+        'off-unsold': offUnsoldList,
+      };
+
+      function summaryCard(id, icon, label, count, bg, color) {
+        return `<div class="status-summary-card" id="status-card-${id}"
+            style="background:${bg};color:${color}" onclick="openStatusDetail('${id}')">
+          <span class="status-card-icon">${icon}</span>
+          <span class="status-card-count" style="color:${color}">${count}</span>
+          <span class="status-card-name">${label}</span>
+        </div>`;
+      }
+
+      const onCards = ON_STATUS_ORDER.map(st => {
+        const d = STATUS_DEF[st];
+        return summaryCard(st, d.icon, st, onBuckets[st].length, d.bg, d.color);
+      }).join('');
+
+      const offCards =
+        summaryCard('off-sold',   '✓', 'Sold',   offSoldList.length,   'var(--green-light)', 'var(--green)') +
+        summaryCard('off-unsold', '✗', 'Unsold', offUnsoldList.length, 'var(--red-light)',   'var(--red)');
+
+      document.getElementById('status-page-content').innerHTML = `
+        <div class="card-label">Sales Status</div>
+        <input type="text" class="page-search" id="status-search"
+          placeholder="Search account name…" oninput="onStatusSearch()" autocomplete="off"
+          style="margin-bottom:4px" />
+        <div id="status-search-hint" style="min-height:18px;font-size:11px;color:var(--text-secondary);margin-bottom:10px"></div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--blue);margin-bottom:8px">On-Premise</div>
+        <div class="status-summary-grid">${onCards}</div>
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-secondary);margin:14px 0 8px">Off-Premise</div>
+        <div class="status-summary-grid" style="grid-template-columns:1fr 1fr">${offCards}</div>`;
+    }
+
+    function openStatusDetail(bucketId) {
+      if (!statusPageBuckets) return;
+      const isOff = bucketId === 'off-sold' || bucketId === 'off-unsold';
+      const onDef = STATUS_DEF[bucketId];
+      const offLabels = { 'off-sold': 'Sold This Month', 'off-unsold': 'Not Sold This Month' };
+      const offColors = { 'off-sold': 'var(--green)', 'off-unsold': 'var(--red)' };
+      const label   = onDef ? (onDef.icon + ' ' + bucketId) : (offLabels[bucketId] || bucketId);
+      const color   = onDef ? onDef.color : (offColors[bucketId] || 'var(--blue)');
+      const defText = STATUS_DEFINITIONS[bucketId] || '';
+
+      document.getElementById('status-detail-title').innerHTML =
+        `${esc(label)}&ensp;<span onclick="toggleStatusDef()" style="cursor:pointer;font-size:13px;opacity:.5;vertical-align:middle" title="Definition">ⓘ</span>`;
+      document.getElementById('status-detail-title').style.color = color;
+      const names = statusPageBuckets[bucketId] || [];
+      document.getElementById('status-detail-sub').textContent =
+        names.length + ' account' + (names.length !== 1 ? 's' : '');
+      document.getElementById('status-detail-sheet').style.borderTopColor = color;
+
+      const defBox = defText
+        ? `<div id="status-def-box" style="display:none;font-size:12px;color:var(--text-secondary);background:var(--gray-bg);border-radius:8px;padding:8px 10px;margin:4px 16px 8px">${esc(defText)}</div>`
+        : '';
+
+      document.getElementById('status-detail-list').innerHTML =
+        defBox +
+        (names.length
+          ? names.map(n => { const safe = n.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); return `<div class="status-detail-item" style="cursor:pointer" onclick="document.getElementById('status-detail-overlay').classList.add('hidden');goToAccountDashboard('${safe}')">${esc(n)}${closedTag(n)}</div>`; }).join('')
+          : '<div class="status-detail-item" style="color:var(--text-secondary);font-style:italic">No accounts in this category</div>');
+
+      document.getElementById('status-detail-overlay').classList.remove('hidden');
+    }
+
+    function toggleStatusDef() {
+      const box = document.getElementById('status-def-box');
+      if (box) box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function closeStatusDetail(e) {
+      if (!e || e.target === document.getElementById('status-detail-overlay'))
+        document.getElementById('status-detail-overlay').classList.add('hidden');
+    }
+
+    const STATUS_SEARCH_IDS = [...ON_STATUS_ORDER, 'off-sold', 'off-unsold'];
+
+    function onStatusSearch() {
+      const q    = (document.getElementById('status-search')?.value || '').toLowerCase().trim();
+      const hint = document.getElementById('status-search-hint');
+
+      if (!q || !statusPageBuckets) {
+        STATUS_SEARCH_IDS.forEach(id => {
+          const el = document.getElementById('status-card-' + id);
+          if (el) { el.style.opacity = ''; el.classList.remove('highlight'); }
+        });
+        if (hint) hint.textContent = '';
+        return;
+      }
+
+      const matched = STATUS_SEARCH_IDS.filter(id =>
+        (statusPageBuckets[id] || []).some(n => n.toLowerCase().includes(q))
+      );
+
+      STATUS_SEARCH_IDS.forEach(id => {
+        const el = document.getElementById('status-card-' + id);
+        if (!el) return;
+        const hit = matched.includes(id);
+        el.style.opacity = hit ? '1' : '0.25';
+        el.classList.toggle('highlight', hit);
+      });
+
+      if (!hint) return;
+      if (matched.length === 0) {
+        hint.style.color = 'var(--red)';
+        hint.textContent = 'No matching accounts';
+      } else {
+        hint.style.color = 'var(--text-secondary)';
+        const offLabels = { 'off-sold':'Off-Premise Sold', 'off-unsold':'Off-Premise Unsold' };
+        hint.textContent = 'Found in: ' + matched.map(id => (STATUS_DEF[id] || {}).label || offLabels[id] || id).join(', ');
+      }
+    }
+
+    // ═══════════════════════════════════════════════
+    // INSIGHTS PAGE
+    // ═══════════════════════════════════════════════
+    function renderInsightsPage() {
+      if (!insightsCache) buildInsightsCache();
+      const { onStats, offAcctMap, acctSoldThisMonth } = insightsCache;
+
+      if (!onStats.length && !Object.keys(offAcctMap).length) {
+        ['ins-trend','ins-scores','ins-cadence','ins-basket','ins-momentum']
+          .forEach(id => { document.getElementById(id).innerHTML = '<div class="acct-empty">No data</div>'; });
+        return;
+      }
+
+      // ── 0. Monthly Revenue Trend (last 12 months) ──
+      (function() {
+        const moLabels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        // Build last 12 month keys
+        const months = [];
+        for (let i = 11; i >= 0; i--) {
+          const d = new Date(maxDate.getFullYear(), maxDate.getMonth() - i, 1);
+          months.push({ key: d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0'), label: moLabels[d.getMonth()] + " '" + String(d.getFullYear()).slice(-2), d });
+        }
+        // Sum revenue per month (all sales, no filter)
+        const revByMonth = {};
+        rawSales.forEach(r => {
+          const k = r.date.getFullYear() + '-' + String(r.date.getMonth()+1).padStart(2,'0');
+          revByMonth[k] = (revByMonth[k] || 0) + (r.revenue || 0);
+        });
+        const vals = months.map(m => revByMonth[m.key] || 0);
+        const maxVal = Math.max(...vals, 1);
+
+        const bars = months.map((m, i) => {
+          const v    = vals[i];
+          const pct  = (v / maxVal * 100).toFixed(1);
+          const isCurrentMo = i === 11;
+          const barCol = isCurrentMo ? 'var(--blue)' : 'var(--blue-mid)';
+          return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px">
+            <div style="font-size:8px;color:var(--text-secondary);writing-mode:vertical-lr;transform:rotate(180deg);height:28px;overflow:hidden;text-overflow:ellipsis">${m.label}</div>
+            <div style="width:100%;display:flex;flex-direction:column;justify-content:flex-end;height:60px">
+              <div style="width:100%;height:${pct}%;background:${barCol};border-radius:2px 2px 0 0;min-height:${v>0?'2':'0'}px" title="${fmtSGD(v)}"></div>
+            </div>
+            <div style="font-size:7px;color:var(--text-secondary)">${v > 0 ? fmtSGD(v).replace('$','') : ''}</div>
+          </div>`;
+        }).join('');
+
+        document.getElementById('ins-trend').innerHTML =
+          `<div style="display:flex;gap:2px;align-items:flex-end;padding:4px 0">${bars}</div>`;
+      })();
+
+      // ── 1. Health Score Leaderboard ────────────
+      const scoreList = [...onStats].sort((a,b) => b.score - a.score).slice(0, 12);
+      document.getElementById('ins-scores').innerHTML = scoreList.map((s, i) => {
+        const cls      = s.score >= 70 ? 'hi' : s.score >= 40 ? 'mid' : 'lo';
+        const barColor = s.score >= 70 ? 'var(--green)' : s.score >= 40 ? 'var(--amber-dark)' : 'var(--red)';
+        const safeN    = s.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        return `<div class="score-row" onclick="selectAccount('${safeN}','${safeN}')">
+          <span class="score-rank">${i+1}</span>
+          <span class="score-name" title="${esc(s.name)}">${esc(s.name)}${closedTag(s.name)}</span>
+          <div class="score-bar-track"><div class="score-bar-fill" style="width:${s.score}%;background:${barColor}"></div></div>
+          <span class="score-badge ${cls}">${s.score}</span>
+        </div>`;
+      }).join('');
+
+      // ── 3. Momentum — 3 buckets ────────────────
+      const allMom    = onStats.filter(s => s.rev3 > 0 || s.revP3 > 0);
+      const risers    = allMom.filter(s => s.rev3 - s.revP3 > 0).sort((a,b) => (b.rev3-b.revP3)-(a.rev3-a.revP3));
+      const fallers   = allMom.filter(s => s.rev3 > 0 && s.revP3 > 0 && s.rev3 < s.revP3).sort((a,b) => (a.rev3-a.revP3)-(b.rev3-b.revP3));
+      const fallenOff = onStats.filter(s => s.rev3 === 0 && s.revP3 > 0).sort((a,b) => b.revP3-a.revP3);
+
+      function acctClick(name) {
+        const safe = name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+        return `style="cursor:pointer" onclick="goToAccountDashboard('${safe}')"`;
+      }
+      function momRow(s, up) {
+        const delta = s.rev3 - s.revP3;
+        const pctStr = s.revP3 > 0 ? '(' + (delta >= 0 ? '+' : '') + Math.round(s.momPct * 100) + '%)' : (s.tenureMo > 6 ? '(RETURN)' : '(NEW)');
+        return `<div class="mom-row" ${acctClick(s.name)}>
+          <span class="mom-arrow">${up ? '↑' : '↓'}</span>
+          <span class="ins-name" title="${esc(s.name)}">${esc(s.name)}${closedTag(s.name)}</span>
+          <span class="mom-delta ${up?'up':'dn'}">${up?'+':''}${fmtSGD(delta)}</span>
+          <span class="mom-pct-sm">${pctStr}</span>
+        </div>`;
+      }
+      function momRowFallenOff(s) {
+        return `<div class="mom-row" ${acctClick(s.name)}>
+          <span class="mom-arrow" style="color:var(--text-secondary)">○</span>
+          <span class="ins-name" title="${esc(s.name)}">${esc(s.name)}${closedTag(s.name)}</span>
+          <span style="font-size:10px;color:var(--text-secondary);flex-shrink:0;white-space:nowrap">was ${fmtSGD(s.revP3)}</span>
+        </div>`;
+      }
+      const noneMsg = dir => `<div class="acct-empty" style="padding:8px 0">${dir}</div>`;
+      document.getElementById('ins-momentum').innerHTML = `
+        <div class="mom-section-label" style="color:var(--green)">Rising ↑</div>
+        <div class="ins-scroll">${risers.length ? risers.map(s=>momRow(s,true)).join('') : noneMsg('None this period')}</div>
+        <div class="mom-section-label" style="color:var(--red);margin-top:10px">Falling ↓ <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">(still active)</span></div>
+        <div class="ins-scroll">${fallers.length ? fallers.map(s=>momRow(s,false)).join('') : noneMsg('None this period')}</div>
+        <div class="mom-section-label" style="color:var(--text-secondary);margin-top:10px">Fallen Off <span style="font-weight:400;font-size:10px;text-transform:none;letter-spacing:0">(zero last 3M)</span></div>
+        <div class="ins-scroll">${fallenOff.length ? fallenOff.map(momRowFallenOff).join('') : noneMsg('None')}</div>`;
+
+      // ── 4. Order Cadence — 3+ active months ───
+      const cadList = onStats.filter(s => s.activeMo >= 3).sort((a,b) => b.cadence - a.cadence);
+      document.getElementById('ins-cadence').innerHTML = cadList.length
+        ? `<div class="ins-scroll">${cadList.map(s => {
+            const pct = Math.round(s.cadence * 100);
+            return `<div class="ins-row" ${acctClick(s.name)}>
+              <span class="ins-name" title="${esc(s.name)}">${esc(s.name)}${closedTag(s.name)}</span>
+              <div class="ins-bar-track"><div class="ins-bar-fill" style="width:${pct}%;background:var(--blue-mid)"></div></div>
+              <span class="ins-val">${pct}% <span style="font-size:10px">(${s.activeMo}/${s.tenureMo}mo)</span></span>
+            </div>`;
+          }).join('')}</div>`
+        : '<div class="acct-empty">No accounts with 3+ active months yet</div>';
+
+      // ── 5. Basket Size ─────────────────────────
+      const basketList = onStats
+        .filter(s => s.activeMo > 0)
+        .sort((a,b) => b.smoothed - a.smoothed);
+
+      const maxB = basketList[0]?.smoothed || 1;
+      document.getElementById('ins-basket').innerHTML = `<div class="ins-scroll">${basketList.map(s => `
+        <div class="ins-row" ${acctClick(s.name)}>
+          <span class="ins-name" title="${esc(s.name)}">${esc(s.name)}${closedTag(s.name)}</span>
+          <span style="font-size:10px;flex-shrink:0;margin-right:4px">${confPips(s.conf)}</span>
+          <div class="ins-bar-track"><div class="ins-bar-fill" style="width:${(s.smoothed/maxB*100).toFixed(1)}%;background:var(--teal-dark)"></div></div>
+          <span class="ins-val">${fmtSGD(s.smoothed)}<span style="font-size:9px;display:block;text-align:right">${s.activeMo}mo</span></span>
+        </div>`).join('')}</div>`;
+
+    }
+
+
+    // ═══════════════════════════════════════════════
+    // ALERTS PAGE
+    // ═══════════════════════════════════════════════
+    function renderAlertsPage() {
+      if (!insightsCache) buildInsightsCache();
+      const { onStats, acctSoldThisMonth } = insightsCache;
+      if (!onStats.length) {
+        ['alert-winback','alert-atrisk','alert-overdue'].forEach(id =>
+          document.getElementById(id).innerHTML = '<div class="acct-empty">No data yet</div>');
+        return;
+      }
+
+      const mo   = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const thisMonthKey = maxDate.getFullYear() + '-' + String(maxDate.getMonth()+1).padStart(2,'0');
+      const prevDate     = new Date(maxDate.getFullYear(), maxDate.getMonth()-1, 1);
+      const prevMonthKey = prevDate.getFullYear() + '-' + String(prevDate.getMonth()+1).padStart(2,'0');
+
+      // ── Last A&P contact (most recent A&P entry per account) ──
+      const lastAP = {};
+      rawAP.forEach(r => {
+        if (!r.account) return;
+        if (!lastAP[r.account] || r.date > lastAP[r.account]) lastAP[r.account] = r.date;
+      });
+
+      function contactLine(name) {
+        const d = lastAP[name];
+        if (!d) return '<span style="font-size:10px;color:var(--text-secondary)">No A&P contact</span>';
+        const days = Math.round((maxDate - d) / 86400000);
+        const col  = days <= 30 ? 'var(--green)' : days <= 90 ? 'var(--amber-dark)' : 'var(--red)';
+        return `<span style="font-size:10px;color:${col}">Last contact: ${days}d ago (${fmtDate(d)})</span>`;
+      }
+
+      // ── 1. WIN-BACK — dormant accounts by peak profit ──────────
+      // Peak profit: max of any single-month profit across all history
+      const profitByAcctMonth = {};
+      rawSales.forEach(r => {
+        const key = r.account + '|' + r.date.getFullYear() + '-' + r.date.getMonth();
+        if (!profitByAcctMonth[key]) profitByAcctMonth[key] = { account: r.account, profit: 0 };
+        profitByAcctMonth[key].profit += (r.revenue || 0) - (r.cogs || 0);
+      });
+      rawAP.forEach(r => {
+        const key = r.account + '|' + r.date.getFullYear() + '-' + r.date.getMonth();
+        if (profitByAcctMonth[key]) profitByAcctMonth[key].profit -= (r.sgd || 0);
+      });
+      const peakProfit = {};
+      Object.values(profitByAcctMonth).forEach(({ account, profit }) => {
+        if (!peakProfit[account] || profit > peakProfit[account]) peakProfit[account] = profit;
+      });
+
+      const dormant = onStats.filter(s => {
+        if (closedAccounts.has(s.name)) return false;
+        const days = Math.round((maxDate - s.lastDate) / 86400000);
+        return days >= 60 && days < 365;
+      }).sort((a,b) => (peakProfit[b.name]||0) - (peakProfit[a.name]||0));
+
+      document.getElementById('alert-winback').innerHTML = dormant.length
+        ? `<div class="ins-scroll">${dormant.map(s => {
+            const peak = peakProfit[s.name] || 0;
+            const days = Math.round((maxDate - s.lastDate) / 86400000);
+            const safe = s.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+            return `<div class="ins-row" style="cursor:pointer" onclick="goToAccountDashboard('${safe}')">
+              <div style="flex:1;min-width:0">
+                <div class="ins-name" title="${esc(s.name)}">${esc(s.name)}</div>
+                <div>${contactLine(s.name)}</div>
+              </div>
+              <div style="text-align:right;flex-shrink:0">
+                <div style="font-size:11px;font-weight:600;color:var(--amber-dark)">${days}d silent</div>
+                <div style="font-size:10px;color:var(--text-secondary)">Peak ${fmtSGD(peak)}</div>
+              </div>
+            </div>`;
+          }).join('')}</div>`
+        : '<div class="acct-empty">No dormant accounts</div>';
+
+      // ── 2. AT-RISK — ordered last month, not yet this month ────
+      const orderedLastMonth = new Set(
+        rawSales.filter(r => {
+          const k = r.date.getFullYear() + '-' + String(r.date.getMonth()+1).padStart(2,'0');
+          return k === prevMonthKey && r.premise === 'on';
+        }).map(r => r.account)
+      );
+      const atRisk = [...orderedLastMonth]
+        .filter(name => !acctSoldThisMonth.has(name) && !closedAccounts.has(name))
+        .map(name => onStats.find(s => s.name === name))
+        .filter(Boolean)
+        .sort((a,b) => (b.rev3||0) - (a.rev3||0));
+
+      document.getElementById('alert-atrisk').innerHTML = atRisk.length
+        ? `<div class="ins-scroll">${atRisk.map(s => {
+            const safe = s.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+            const daysSince = Math.round((maxDate - s.lastDate) / 86400000);
+            return `<div class="ins-row" style="cursor:pointer" onclick="goToAccountDashboard('${safe}')">
+              <div style="flex:1;min-width:0">
+                <div class="ins-name" title="${esc(s.name)}">${esc(s.name)}</div>
+                <div>${contactLine(s.name)}</div>
+              </div>
+              <div style="text-align:right;flex-shrink:0">
+                <div style="font-size:11px;font-weight:600;color:var(--red)">${daysSince}d ago</div>
+                <div style="font-size:10px;color:var(--text-secondary)">${fmtSGD(s.rev3||0)} last 3M</div>
+              </div>
+            </div>`;
+          }).join('')}</div>`
+        : '<div class="acct-empty" style="color:var(--green)">✓ No at-risk accounts this month</div>';
+
+      // ── 3. OVERDUE REORDER — 95%+ past avg M-3 reorder interval ──
+      // Avg reorder interval: median gap between orders over last 3 months per account
+      const overdue = [];
+      onStats.forEach(s => {
+        // Get last 3 months of order dates for this account
+        const threeMonthsAgo = new Date(maxDate.getFullYear(), maxDate.getMonth()-3, 1);
+        const recentDates = rawSales
+          .filter(r => r.account === s.name && r.premise === 'on' && r.date >= threeMonthsAgo)
+          .map(r => r.date.getTime())
+          .filter((v,i,a) => a.indexOf(v) === i) // unique days
+          .sort((a,b) => a-b);
+        if (recentDates.length < 2) return; // not enough data
+        // Average gap in days
+        const gaps = [];
+        for (let i = 1; i < recentDates.length; i++)
+          gaps.push((recentDates[i] - recentDates[i-1]) / 86400000);
+        const avgGap = gaps.reduce((a,b) => a+b, 0) / gaps.length;
+        if (avgGap < 1) return;
+        const daysSinceLast = (maxDate - s.lastDate) / 86400000;
+        const pct = daysSinceLast / avgGap;
+        if (pct >= 0.95 && !acctSoldThisMonth.has(s.name) && !closedAccounts.has(s.name)) {
+          overdue.push({ s, avgGap, daysSinceLast, pct });
+        }
+      });
+      overdue.sort((a,b) => b.pct - a.pct);
+
+      document.getElementById('alert-overdue').innerHTML = overdue.length
+        ? `<div class="ins-scroll">${overdue.map(({ s, avgGap, daysSinceLast, pct }) => {
+            const safe = s.name.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+            const overPct = Math.min(Math.round(pct * 100), 999);
+            const col = pct >= 1.5 ? 'var(--red)' : pct >= 1 ? 'var(--amber-dark)' : 'var(--text-secondary)';
+            return `<div class="ins-row" style="cursor:pointer" onclick="goToAccountDashboard('${safe}')">
+              <div style="flex:1;min-width:0">
+                <div class="ins-name" title="${esc(s.name)}">${esc(s.name)}</div>
+                <div style="font-size:10px;color:var(--text-secondary)">Avg cycle ${Math.round(avgGap)}d · ${Math.round(daysSinceLast)}d since last order</div>
+              </div>
+              <div style="text-align:right;flex-shrink:0">
+                <div style="font-size:12px;font-weight:700;color:${col}">${overPct}%</div>
+                <div style="font-size:9px;color:var(--text-secondary)">of cycle</div>
+              </div>
+            </div>`;
+          }).join('')}</div>`
+        : '<div class="acct-empty" style="color:var(--green)">✓ No overdue reorders</div>';
+    }
+
+    // ═══════════════════════════════════════════════
+    // LISTINGS CARD
+    // ═══════════════════════════════════════════════
+    function renderListingsCard() {
+      const card = document.getElementById('listings-card');
+      if (!card) return;
+      if (!rawListing.length) { card.style.display = 'none'; return; }
+      card.style.display = '';
+
+      const today = new Date(maxDate); today.setHours(0,0,0,0);
+
+      // Split active vs expired — "active" = active? flag truthy AND contractEnd in future (or no end)
+      const isActive = r => {
+        const flagOn = !r.active || ['yes','y','true','1','active'].includes(r.active);
+        const notExpired = !r.contractEnd || r.contractEnd >= today;
+        return flagOn && notExpired;
+      };
+
+      const active  = rawListing.filter(isActive)
+        .sort((a,b) => {
+          // Sort by contract end ascending (soonest expiring first); no-end-date last
+          if (!a.contractEnd && !b.contractEnd) return a.account.localeCompare(b.account);
+          if (!a.contractEnd) return 1;
+          if (!b.contractEnd) return -1;
+          return a.contractEnd - b.contractEnd;
+        });
+
+      const expired = rawListing.filter(r => !isActive(r))
+        .sort((a,b) => {
+          // Most recently expired first
+          if (!a.contractEnd && !b.contractEnd) return a.account.localeCompare(b.account);
+          if (!a.contractEnd) return 1;
+          if (!b.contractEnd) return -1;
+          return b.contractEnd - a.contractEnd;
+        });
+
+      function daysUntil(d) { return Math.round((d - today) / 86400000); }
+      function fmtShort(d) {
+        if (!d) return '—';
+        return d.toLocaleDateString('en-SG', { day:'numeric', month:'short', year:'numeric' });
+      }
+
+      function endLabel(r, isExp) {
+        if (!r.contractEnd) return '<span class="listing-end" style="color:var(--text-secondary)">No end date</span>';
+        if (isExp) return `<span class="listing-end listing-expired">${fmtShort(r.contractEnd)}</span>`;
+        const d = daysUntil(r.contractEnd);
+        const cls = d <= 14 ? 'listing-expiry-urgent' : d <= 60 ? 'listing-expiry-warn' : '';
+        const label = d === 0 ? 'Expires today' : d < 0 ? 'Expired' : `${d}d left`;
+        return `<span class="listing-end ${cls}">${fmtShort(r.contractEnd)}<br><span style="font-size:9px;font-weight:400">${label}</span></span>`;
+      }
+
+      // Revenue per listed account (FYTD from periodStart)
+      const listingPeriodStart = periodStart(maxDate);
+      const acctRevMap = {};
+      rawSales.filter(r => r.date >= listingPeriodStart && r.date <= maxDate)
+        .forEach(r => { acctRevMap[r.account] = (acctRevMap[r.account] || 0) + (r.revenue || 0); });
+
+      // Set of known account names for unmatched flag
+      const knownAccounts = new Set(rawSales.map(r => r.account.toLowerCase()));
+
+      function buildRow(r, isExp) {
+        const desig    = r.designation ? `<span class="listing-desig">${esc(r.designation)}</span>` : '';
+        const fee      = r.fee ? `<span class="listing-fee">$${r.fee.toLocaleString()}/yr</span>` : '';
+        const start    = r.contractStart ? `<span class="listing-meta">From ${fmtShort(r.contractStart)}</span>` : '';
+        const matched  = knownAccounts.has(r.account.toLowerCase());
+        const warnBadge = !matched
+          ? `<span style="font-size:9px;font-weight:600;background:#FFF3CD;color:#856404;border-radius:4px;padding:1px 5px;margin-left:4px">⚠ no sales match</span>`
+          : '';
+        // ROI: FYTD revenue vs annual fee (only show for active listings with a fee)
+        let roi = '';
+        if (!isExp && r.fee && matched) {
+          const rev  = acctRevMap[r.account] || 0;
+          const ratio = rev / r.fee;
+          const roiCol = ratio >= 3 ? 'var(--green)' : ratio >= 1 ? 'var(--amber-dark)' : 'var(--red)';
+          roi = `<span class="listing-meta" style="color:${roiCol};font-weight:600">ROI ${ratio.toFixed(1)}× (${fmtSGD(rev)} FYTD)</span>`;
+        }
+        return `<div class="listing-row${isExp?' listing-expired':''}">
+          <div>
+            <span class="listing-name">${esc(r.account)}</span>${desig}${warnBadge}
+            ${start}
+            ${roi}
+          </div>
+          <div style="text-align:right">
+            ${endLabel(r, isExp)}
+            ${fee}
+          </div>
+        </div>`;
+      }
+
+      const activeEl  = document.getElementById('listings-active');
+      const expiredEl = document.getElementById('listings-expired');
+
+      activeEl.innerHTML = active.length
+        ? `<div class="listing-section-hd" style="color:var(--green)">Active (${active.length})</div>` +
+          active.map(r => buildRow(r, false)).join('')
+        : '<div class="acct-empty">No active listings</div>';
+
+      if (expired.length) {
+        expiredEl.style.display = '';
+        expiredEl.innerHTML =
+          `<div class="listing-section-hd" style="color:var(--gray-muted);border-top:1px solid var(--gray-border);padding-top:10px">Expired (${expired.length})</div>` +
+          expired.map(r => buildRow(r, true)).join('');
+      } else {
+        expiredEl.style.display = 'none';
+      }
+    }
+
+  </script>
 </body>
 </html>
